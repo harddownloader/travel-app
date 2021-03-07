@@ -1,0 +1,22 @@
+$var1: #60b6ee;
+html,
+body {
+  height: 100vh;
+  background-color: $var1;
+  color: #fff;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > h1 {
+  text-align: center;
+  width: 100%;
+  display: block;
+  background-image: url('assets/images/logo.png');
+}
+.container > img {
+  border-radius: 50%;
+}
