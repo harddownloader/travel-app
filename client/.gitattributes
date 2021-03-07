@@ -1,0 +1,18 @@
+* text=auto
+# forse text
+*.html text
+*.js text
+*.css text
+
+# windows 
+*.sln text eol=ctrf
+*.bat eol=ctrf
+
+#unix
+*.sh eol=lf
+
+# binary
+*.jpg -diff
+*.gif binary
+*.svg binary
+*.png binary

@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"lib": ["dom", "dom.iterable", "esnext"],//Стандартный набор текста, который должен быть включен в процесс проверки типа
+		"allowJs": true,//Разрешить ли компилировать файлы JavaScript.
+		"allowSyntheticDefaultImports": true,//импортировать по умолчанию из модулей без экспорта по умолчанию в процессе проверки типа.
+		"skipLibCheck": true,//Следует ли пропустить проверку типа всех файлов объявления типа (* .d.ts).
+		"esModuleInterop": true,//Это обеспечивает совместимость с Babel.
+		"strict": true,//проект работает в строгом режиме.
+		"forceConsistentCasingInFileNames": true,//Обеспечивает согласованность регистра имен файлов
+		"moduleResolution": "node",//Как разрешаются зависимости модулей, что является узлом для нашего проекта.
+		"resolveJsonModule": true,//Это позволяет модулям находиться в .jsonфайлах,
+		"isolatedModules": true,//
+		"noEmit": true,//Следует ли подавлять генерирующий код TypeScript во время процесса компиляции
+		"jsx": "react"//оддерживать ли JSX в .tsxфайлах.
+	},
+	"include": ["src"], //Это файлы и папки, которые TypeScript должен проверить.
+	"exlude": ["src/redux"]
+}
