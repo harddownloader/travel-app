@@ -76,11 +76,16 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.(png|jpg|svg|gif|webp)$/,
+				test: /\.(png|jpg|gif|webp)$/,
 				type: 'asset/resource',
 				generator: {
 					filename: './assets/images/[hash][ext][query]',
 				},
+			},
+			{
+				test: /\.svg$/,
+				//	type: 'asset/resource',
+				use: ['@svgr/webpack'],
 			},
 		],
 	},
