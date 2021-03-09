@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Search = (): JSX.Element => {
 	const classes = useStyles()
+
 	return (
 		<div className={classes.search}>
 			<div className={classes.searchIcon}>
@@ -60,7 +61,7 @@ const Search = (): JSX.Element => {
 					root: classes.inputRoot,
 					input: classes.inputInput,
 				}}
-				inputProps={{ 'aria-label': 'search' }}
+				inputProps={{ 'aria-label': 'search', autoFocus: true }}
 			/>
 		</div>
 	)
