@@ -1,6 +1,8 @@
 import React from 'react';
 import './footer.scss'
 import { Grid } from '@material-ui/core';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Footer = () => {
     return (
@@ -9,23 +11,23 @@ const Footer = () => {
             <Grid container >
                 <Grid item container xs={3}>
                     <Grid xs={12} item>Vlas</Grid>
-                    <Grid xs={6} item>Linkedin</Grid>
-                    <Grid xs={6} item>Git</Grid>
+                    <Grid xs={6} item><LinkedInIcon /></Grid>
+                    <Grid xs={6} item><GitHubIcon /></Grid>
                 </Grid>
                 <Grid item container xs={3}>
                     <Grid xs={12} item>Jenya</Grid>
-                    <Grid xs={6} item>Linkedin</Grid>
-                    <Grid xs={6} item>Git</Grid>
+                    <Grid xs={6} item><LinkedInIcon /></Grid>
+                    <Grid xs={6} item><GitHubIcon /></Grid>
                 </Grid>
                 <Grid item container xs={3}>
                     <Grid xs={12} item>Sergey</Grid>
-                    <Grid xs={6} item>Linkedin</Grid>
-                    <Grid xs={6} item>Git</Grid>
+                    <Grid xs={6} item><LinkedInIcon /></Grid>
+                    <Grid xs={6} item><GitHubIcon /></Grid>
                 </Grid>
                 <Grid item container xs={3}>
                     <Grid xs={12} item>Serafim</Grid>
-                    <Grid xs={6} item>Linkedin</Grid>
-                    <Grid xs={6} item>Git</Grid>
+                    <Grid xs={6} item><LinkedInIcon /></Grid>
+                    <Grid xs={6} item><GitHubIcon /></Grid>
                 </Grid>
             </Grid>
         </footer>

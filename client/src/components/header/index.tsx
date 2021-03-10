@@ -9,6 +9,9 @@ import Language from './Language'
 import Footer from '../footer/Footer'
 import Maps from '../map/Map'
 
+const a = window.pageYOffset
+console.log(a)
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
