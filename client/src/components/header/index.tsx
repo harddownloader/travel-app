@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Search from './Search'
 import Language from './Language'
+import Footer from '../footer/Footer'
+import Maps from '../map/Map'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -42,6 +44,8 @@ export default function SearchAppBar(): JSX.Element {
 					<Language />
 				</Toolbar>
 			</AppBar>
+			<Maps />
+			<Footer />
 		</div>
 	)
 }
