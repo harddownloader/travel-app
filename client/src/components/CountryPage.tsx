@@ -9,6 +9,7 @@ import getCountryData from '../helpers/getCountryData'
 
 //components
 import About from './About'
+import PlacesList from './PlacesList'
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
@@ -16,6 +17,7 @@ const CountryPage: CountryPage = () => {
 		capital: '',
 		name: '',
 		description: '',
+        places: ''
 	})
 	const [loaded, setLoaded] = useState(false)
 
@@ -46,6 +48,9 @@ const CountryPage: CountryPage = () => {
 			)}
 			{loaded && (
 				<About description={countryData.description} name={countryData.name} />
+			)}
+            {loaded && (
+				<PlacesList places={countryData.places} />
 			)}
 		</>
 	)
