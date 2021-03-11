@@ -1,5 +1,7 @@
 import React from 'react';
 import { Player } from 'video-react';
+// https://github.com/video-react/video-react
+
 // import logo from '@/assets/images/logo.png'
 // const videoSrc = "https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
 
