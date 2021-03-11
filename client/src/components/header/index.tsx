@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Search from './Search'
 import Language from './Language'
-import Footer from '../footer/Footer'
 import Maps from '../map/Map'
 
 const a = window.pageYOffset
@@ -15,7 +14,7 @@ console.log(a)
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			paddingTop: '10px',
+			width: '100%',
 			flexGrow: 1,
 		},
 		menuButton: {
@@ -48,7 +47,6 @@ export default function SearchAppBar(): JSX.Element {
 				</Toolbar>
 			</AppBar>
 			<Maps />
-			<Footer />
 		</div>
 	)
 }

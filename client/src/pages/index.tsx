@@ -1,16 +1,15 @@
 import React from 'react'
 import Header from '@/components/header/'
-import logo from '@/assets/images/logo.png'
+import Main from '@/components/main/'
 import '@/index.scss'
+import Footer from '@/components/footer/Footer'
 
-export default function src(): JSX.Element {
+export default function Src(): JSX.Element {
 	return (
 		<>
 			<Header />
-			<div className='container'>
-				<h1>Hello World!</h1>
-				<img src={logo} alt='' />
-			</div>
+			<Main />
+			<Footer />
 		</>
 	)
 }
