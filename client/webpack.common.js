@@ -69,17 +69,17 @@ module.exports = {
 				// },
 			},
 			{
-				test: /\.(ttf|woff|woff2|eot)$/,
-				type: 'asset/resource',
-				generator: {
-					filename: './assets/fonts/[hash][ext][query]',
-				},
-			},
-			{
 				test: /\.(png|jpg|gif|webp)$/,
 				type: 'asset/resource',
 				generator: {
 					filename: './assets/images/[hash][ext][query]',
+				},
+			},
+			{
+				test: /\.(ttf|woff|woff2|eot)$/,
+				type: 'asset/resource',
+				generator: {
+					filename: './assets/fonts/[hash][ext][query]',
 				},
 			},
 			{
