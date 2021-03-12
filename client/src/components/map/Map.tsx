@@ -1,20 +1,25 @@
+import { Place } from '@material-ui/icons';
 import React from 'react'
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { YMaps, Map, Placemark, FullscreenControl, ZoomControl } from "react-yandex-maps";
 
 const mapData = {
-    center: [55.751574, 37.573856],
-    zoom: 5,
+    center: [53.902496, 27.561481],
+    zoom: 9,
+    geometry:[53.902284, 27.561831]
 };
 
-const coordinates = [
-    [55.684758, 37.738521],
-    [57.684758, 39.738521]
-];
-
 const Maps = () => (
-    <YMaps>
-        <Map defaultState={mapData}>
-            {coordinates.map(coordinate => <Placemark key={mapData.zoom} geometry={coordinate} />)}
+    <YMaps query={{ lang: 'en_US' }}>
+        <Map
+            defaultState={{
+                center: mapData.center,
+                zoom: mapData.zoom,
+                controls: [],
+            }}
+        >
+            <ZoomControl options={{ float: 'right' }} />
+            <FullscreenControl />
+            <Placemark geometry={mapData.geometry}/>
         </Map>
     </YMaps>
 );
