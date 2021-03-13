@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from '@/components/header/'
-import Main from '@/components/main/'
+import Cards from '@/components/cards'
 // import Video from '@/components/Video'
 // import Currencies from '@/components/Currencies'
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+// import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 
 import CountryPage from '@/components/CountryPage'
 
@@ -17,6 +17,9 @@ export default function Src(): JSX.Element {
 		hits: [],
 	})
 
+
+	// console.log('pathname', document.location.pathname)
+
 	const [leng, setLeng] = useState('ru')
 	const [data, setData] = useState([])
 
@@ -28,20 +31,22 @@ export default function Src(): JSX.Element {
 				ContextData: [data, setData],
 			}}>
 			<Router>
-				<ScopedCssBaseline>
+				{/* <ScopedCssBaseline> */}
 					<Switch>
 						{/* home page */}
 						<Route exact path='/'>
 							<Header />
-							<Main />
+							<Cards />
 							<Footer />
 						</Route>
 						{/* country page */}
 						<Route path='/:id'>
+							<Header />
 							<CountryPage />
+							<Footer />
 						</Route>
 					</Switch>
-				</ScopedCssBaseline>
+				{/* </ScopedCssBaseline> */}
 			</Router>
 		</Context.Provider>
 	)

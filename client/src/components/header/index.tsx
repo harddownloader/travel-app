@@ -6,9 +6,11 @@ import Typography from '@material-ui/core/Typography'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Search from './Search'
 import Language from './Language'
+import { Link } from 'react-router-dom'
 
 const a = window.pageYOffset
 console.log(a)
+
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -19,29 +21,49 @@ const useStyles = makeStyles((theme: Theme) =>
 		menuButton: {
 			marginRight: theme.spacing(2),
 		},
-		title: {
+		// title: {
+		// 	flexGrow: 1,
+		// 	width: 'auto',
+		// 	// [theme.breakpoints.up('sm')]: {
+		// 	// 	width: 'auto',
+		// 	// 	display: 'inline-block'
+		// 	// },
+		// },
+		mainPage: {
 			flexGrow: 1,
+			width: 'auto',
 			display: 'none',
 			[theme.breakpoints.up('sm')]: {
 				width: 'auto',
-				display: 'inline-block',
+				display: 'inline-block'
 			},
 		},
+		notMainPage: {
+			flexGrow: 1,
+			width: 'auto',
+			display: 'block'
+		}
 	}),
 )
 
 export default function SearchAppBar(): JSX.Element {
 	const classes = useStyles()
 
+	const getDisplayPropertyForTitle = () => {
+		return document.location.pathname === "/" ? classes.mainPage : classes.notMainPage
+	}
+
 	return (
 		<div className={classes.root}>
 			<AppBar position='static'>
 				<Toolbar>
-					<Logo />
-					<Typography className={classes.title} variant='h6' noWrap>
-						Travel-app
+					<Link to="/" >
+						<Logo />
+					</Link>
+					<Typography className={getDisplayPropertyForTitle()} variant='h6' noWrap>
+						Travel App
 					</Typography>
-					<Search />
+					{document.location.pathname === "/" && <Search />}
 					<Language />
 				</Toolbar>
 			</AppBar>
