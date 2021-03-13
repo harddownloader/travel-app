@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import LanguageIcon from '@material-ui/icons/Language'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -6,12 +6,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import { SvgIcon } from '@material-ui/core'
-import LangOptions from './LangOptions'
+import getLangOptions from './LangOptions'
+import { Context } from '@/utils/Context.jsx'
 
 const Language = (): JSX.Element => {
-	//const classes = useStyles()
+	const { ContextLeng } = useContext(Context)
+	const [leng, setLeng] = ContextLeng
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [selectedIndex, setSelectedIndex] = useState(0)
+	const [langOptions, setLangOptions] = useState(getLangOptions(leng))
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
@@ -21,10 +24,15 @@ const Language = (): JSX.Element => {
 	const handleMenuItemClick = (
 		event: React.MouseEvent<HTMLElement>,
 		index: number,
+		descriptor: string,
 	) => {
 		setSelectedIndex(index)
-		setAnchorEl(null)
+		setLeng(descriptor)
+		//	setAnchorEl(null)
 	}
+	useEffect(() => {
+		setLangOptions(getLangOptions(leng))
+	}, [leng])
 
 	return (
 		<div>
@@ -41,16 +49,18 @@ const Language = (): JSX.Element => {
 				keepMounted
 				open={Boolean(anchorEl)}
 				onClose={handleClose}>
-				{LangOptions.map((LangOptions, index) => (
+				{langOptions.map((langOptions, index) => (
 					<MenuItem
 						//	className={classes.root}
-						key={LangOptions.leng}
+						key={langOptions.leng}
 						selected={index === selectedIndex}
-						onClick={event => handleMenuItemClick(event, index)}>
+						onClick={event =>
+							handleMenuItemClick(event, index, langOptions.descriptor)
+						}>
 						<ListItemIcon>
-							<SvgIcon>{LangOptions.img}</SvgIcon>
+							<SvgIcon>{langOptions.img}</SvgIcon>
 						</ListItemIcon>
-						<ListItemText primary={LangOptions.leng} />
+						<ListItemText primary={langOptions.leng} />
 					</MenuItem>
 				))}
 			</Menu>
