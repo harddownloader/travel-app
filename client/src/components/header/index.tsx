@@ -57,7 +57,7 @@ export default function SearchAppBar(): JSX.Element {
 		<div className={classes.root}>
 			<AppBar position='static'>
 				<Toolbar>
-					<Link to="/" >
+					<Link to="/" style={{textDecoration: 'none'}}>
 						<Logo />
 					</Link>
 					<Typography className={getDisplayPropertyForTitle()} variant='h6' noWrap>
