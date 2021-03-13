@@ -10,6 +10,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Card from './Card'
 import './swiper.css'
 SwiperCore.use([Navigation, Pagination, EffectFade])
+import Map from '../map/Map'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -31,63 +32,66 @@ const Main = (): JSX.Element => {
 	//	const slideTo = index => swiper.slideTo(index)
 
 	return (
-		<Swiper
-			pagination={{
-				clickable: true,
-				el: '.pagination',
-				type: 'custom',
-				renderCustom: function (Swiper, current) {
-					return current
-				},
-			}}
-			slidesPerColumnFill='row'
-			slidesPerView={1}
-			slidesPerColumn={3}
-			breakpoints={{
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 40,
-					slidesPerColumn: 3,
-				},
-				1280: {
-					slidesPerView: 2,
-					spaceBetween: 40,
-					slidesPerColumn: 3,
-				},
-			}}
-			spaceBetween={40}
-			navigation={{
-				prevEl: '.prev',
-				nextEl: '.next',
-			}}
+		<div >
+			<Map />
+			{/* <Swiper
+				pagination={{
+					clickable: true,
+					el: '.pagination',
+					type: 'custom',
+					renderCustom: function (Swiper, current) {
+						return current
+					},
+				}}
+				slidesPerColumnFill='row'
+				slidesPerView={1}
+				slidesPerColumn={3}
+				breakpoints={{
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 40,
+						slidesPerColumn: 3,
+					},
+					1280: {
+						slidesPerView: 2,
+						spaceBetween: 40,
+						slidesPerColumn: 3,
+					},
+				}}
+				spaceBetween={40}
+				navigation={{
+					prevEl: '.prev',
+					nextEl: '.next',
+				}}
 			// onSlideChange={() => console.log('slide change')}
 			// onSwiper={(swiper) => console.log(swiper)}
-		>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-			<SwiperSlide>
-				<Card />
-			</SwiperSlide>
-		</Swiper>
+			>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Card />
+				</SwiperSlide>
+			</Swiper> */}
+		</div>
 	)
 }
 

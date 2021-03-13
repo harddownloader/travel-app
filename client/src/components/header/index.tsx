@@ -46,7 +46,6 @@ export default function SearchAppBar(): JSX.Element {
 					<Language />
 				</Toolbar>
 			</AppBar>
-			<Maps />
 		</div>
 	)
 }
