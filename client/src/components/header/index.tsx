@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Search from './Search'
 import Language from './Language'
-import Maps from '../map/Map'
 
 const a = window.pageYOffset
 console.log(a)
@@ -46,7 +45,6 @@ export default function SearchAppBar(): JSX.Element {
 					<Language />
 				</Toolbar>
 			</AppBar>
-			<Maps />
 		</div>
 	)
 }
