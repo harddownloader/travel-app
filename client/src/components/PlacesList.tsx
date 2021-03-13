@@ -75,25 +75,7 @@ const PlacesList: PlacesList = (props) => {
             photoUrl={item.photoUrl} 
             />
             </SwiperSlide>)
-        })}
-        {props.places.map((item: any) => {
-          return (<SwiperSlide key={Math.random().toString()}>
-            <PlaceItem 
-            name={item.name} 
-            description={item.description} 
-            photoUrl={item.photoUrl} 
-            />
-            </SwiperSlide>)
-        })}
-        {props.places.map((item: any) => {
-          return (<SwiperSlide key={Math.random().toString()}>
-            <PlaceItem 
-            name={item.name} 
-            description={item.description} 
-            photoUrl={item.photoUrl} 
-            />
-            </SwiperSlide>)
-        })}
+        })}        
         <Box className={classes.container}>
         <div className={clsx(classes.placesList__button__prev, "prev")}>
           <NavigateBeforeIcon fontSize='large'/>
