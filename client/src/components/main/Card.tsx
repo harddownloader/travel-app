@@ -7,9 +7,13 @@ import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(() =>
 	createStyles({
+		listStyles: {
+			textDecoration: 'none'
+		},
 		root: {
 			cursor: 'pointer',
 			maxWidth: 345,
@@ -63,26 +67,29 @@ export default function RecipeReviewCard({
 	const shortInfo = ` ${description.substr(0, 200)}...`
 
 	return (
-		<Card
-			className={classes.root}
-			onPointerDown={() => {
-				console.log([id, code])
-			}}>
-			<CardHeader
-				avatar={
-					<Avatar aria-label='recipe' className={classes.avatar}>
-						R
-					</Avatar>
-				}
-				title={name}
-				subheader={capital}
-			/>
-			<CardMedia className={classes.media} image={imageimageUrl} title={name} />
-			<CardContent>
-				<Typography variant='body2' className={classes.cardInfo} component='p'>
-					{shortInfo}
-				</Typography>
-			</CardContent>
-		</Card>
+		<Link to={id} className={classes.listStyles}>
+			<Card
+				className={classes.root}
+				onPointerDown={() => {
+					console.log([id, code])
+				}}
+				>
+				<CardHeader
+					avatar={
+						<Avatar aria-label='recipe' className={classes.avatar}>
+							R
+						</Avatar>
+					}
+					title={name}
+					subheader={capital}
+				/>
+				<CardMedia className={classes.media} image={imageimageUrl} title={name} />
+				<CardContent>
+					<Typography variant='body2' className={classes.cardInfo} component='p'>
+						{shortInfo}
+					</Typography>
+				</CardContent>
+			</Card>
+		</Link>
 	)
 }

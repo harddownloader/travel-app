@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Card from './Card'
+import CardCountry from './Card'
 import useDataApi from '@/utils/useDataApi'
 import { Context } from '@/utils/Context.jsx'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
@@ -49,7 +49,7 @@ const Main = (): JSX.Element => {
 							{!countries.hits &&
 								countries.map((item: CountryType) => (
 									<Grid key={item.id} item>
-										<Card
+										<CardCountry
 											imageimageUrl={item.imageUrl}
 											capital={item.capital}
 											name={item.name}
