@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -7,13 +7,12 @@ import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
-import './card.css'
-const useStyles = makeStyles((theme: Theme) =>
+
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			cursor: 'pointer',
 			maxWidth: 345,
-			height: '90%',
 			color: '#000',
 			background: '#ccccf1',
 			transition: 'all .5s',
@@ -33,17 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 0,
 			paddingTop: '56.25%', // 16:9
 			transition: 'all .5s',
-			'&:hover': {},
 		},
-		expand: {
-			transform: 'rotate(0deg)',
-			marginLeft: 'auto',
-			transition: theme.transitions.create('transform', {
-				duration: theme.transitions.duration.shortest,
-			}),
-		},
-		expandOpen: {
-			transform: 'rotate(180deg)',
+		cardInfo: {
+			height: 'auto',
 		},
 		avatar: {
 			backgroundColor: red[500],
@@ -63,6 +54,7 @@ export default function RecipeReviewCard({
 	description: string
 }): JSX.Element {
 	const classes = useStyles()
+	const shortInfo = ` ${description.substr(0, 200)}...`
 
 	return (
 		<Card className={classes.root}>
@@ -77,8 +69,8 @@ export default function RecipeReviewCard({
 			/>
 			<CardMedia className={classes.media} image={imageimageUrl} title={name} />
 			<CardContent>
-				<Typography variant='body2' className='card-info' component='p'>
-					{description}
+				<Typography variant='body2' className={classes.cardInfo} component='p'>
+					{shortInfo}
 				</Typography>
 			</CardContent>
 		</Card>

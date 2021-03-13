@@ -1,23 +1,32 @@
 import React, { useContext } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Navigation, Pagination, EffectFade } from 'swiper'
-import 'swiper/swiper.scss'
-import 'swiper/components/navigation/navigation.scss'
-import 'swiper/components/pagination/pagination.scss'
 import Card from './Card'
-import './swiper.css'
 import useDataApi from '@/utils/useDataApi'
 import { Context } from '@/utils/Context.jsx'
-SwiperCore.use([Navigation, Pagination, EffectFade])
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import { CountryType } from '@/utils/typeCountry'
+const useStyles = makeStyles(() =>
+	createStyles({
+		root: {
+			margin: 0,
+			overflow: 'auto',
+			flexGrow: 1,
+		},
+	}),
+)
 
 const Main = (): JSX.Element => {
+	const classes = useStyles()
 	const { ContextCountries, ContextLeng } = useContext(Context)
-	const [countries, setCountries] = ContextCountries
-	const [leng, setLeng] = ContextLeng
+	const [countries] = ContextCountries
+	const [leng] = ContextLeng
 	const [
-		{ data, isLoading, isError },
-		/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-		doFetch,
+		{
+			data, // eslint-disable-line
+			isLoading,
+			isError,
+		},
+		doFetch, // eslint-disable-line
 	] = useDataApi(
 		`	https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
 		{
@@ -26,71 +35,31 @@ const Main = (): JSX.Element => {
 	)
 
 	return (
-		<Swiper
-			pagination={{
-				clickable: true,
-				el: '.pagination',
-				type: 'custom',
-				renderCustom: function (Swiper, current) {
-					return current
-				},
-			}}
-			slidesPerColumnFill='row'
-			slidesPerView={1}
-			slidesPerColumn={1}
-			breakpoints={{
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 40,
-					slidesPerColumn: 2,
-				},
-				1280: {
-					slidesPerView: 3,
-					spaceBetween: 40,
-					slidesPerColumn: 3,
-				},
-			}}
-			spaceBetween={20}
-			navigation={{
-				prevEl: '.prev',
-				nextEl: '.next',
-			}}
-			// onSlideChange={() => console.log('slide change')}
-			// onSwiper={(swiper) => console.log(swiper)}
-		>
+		<>
 			{isError && <div>Something went wrong ...</div>}
 			{isLoading ? (
 				<div>Loading ...</div>
 			) : (
-				<>
-					{!countries.hits &&
-						countries.map((item: Country) => (
-							<SwiperSlide key={item.id}>
-								<Card
-									imageimageUrl={item.imageUrl}
-									capital={item.capital}
-									name={item.name}
-									description={item.description}
-								/>
-							</SwiperSlide>
-						))}
-				</>
+				<Grid container className={classes.root} spacing={2}>
+					<Grid item xs={12}>
+						<Grid container justify='center' spacing={4}>
+							{!countries.hits &&
+								countries.map((item: CountryType) => (
+									<Grid key={item.id} item>
+										<Card
+											imageimageUrl={item.imageUrl}
+											capital={item.capital}
+											name={item.name}
+											description={item.description}
+										/>
+									</Grid>
+								))}
+						</Grid>
+					</Grid>
+				</Grid>
 			)}
-		</Swiper>
+		</>
 	)
 }
-type Country = {
-	ISOCode: string
-	capital: string
-	capitalLocation: {
-		coordinates: [number, number]
-		type: string
-	}
-	currency: string
-	description: string
-	id: string
-	imageUrl: string
-	name: string
-	videoUrl: string
-}
+
 export default Main
