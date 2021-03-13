@@ -3,34 +3,67 @@ import './footer.scss'
 import { Grid } from '@material-ui/core';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { Icon } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import logo from '../../assets/images/rs-school.png'
+
+const useStyles = makeStyles((theme) => ({
+    width: {
+        width: '20px',
+        height: "30px"
+    },
+}));
+
 
 const Footer = () => {
+    const classes = useStyles();
+
     return (
         <footer className='footer'>
-            <p>&#169; Rolling Scoope 2021.</p>
             <Grid container >
-                <Grid item container xs={3}>
-                    <Grid xs={12} item>Vlas</Grid>
-                    <Grid xs={6} item><LinkedInIcon /></Grid>
-                    <Grid xs={6} item><GitHubIcon /></Grid>
+                <Grid container xs={2}>
+                    <Grid item xs={12}><p>The Rolling Scopes School.</p></Grid>
+                    <Grid item xs={1} xl={12}>
+                        <Icon ><img className={classes.width} src={logo} /></Icon>
+                    </Grid>
                 </Grid>
-                <Grid item container xs={3}>
-                    <Grid xs={12} item>Jenya</Grid>
-                    <Grid xs={6} item><LinkedInIcon /></Grid>
-                    <Grid xs={6} item><GitHubIcon /></Grid>
+                <Grid container xs={2}>
+                    <Grid xs={12} item><p>Vlas : Belarus</p></Grid>
+                    <Grid xs={12} item container>
+                        <Grid xs={6} item><a href='?'><LinkedInIcon fontSize='large' /></a></Grid>
+                        <Grid xs={6} item><a href='?'><GitHubIcon fontSize='large' /></a></Grid>
+                    </Grid>
                 </Grid>
-                <Grid item container xs={3}>
-                    <Grid xs={12} item>Sergey</Grid>
-                    <Grid xs={6} item><LinkedInIcon /></Grid>
-                    <Grid xs={6} item><GitHubIcon /></Grid>
+                <Grid container xs={2}>
+                    <Grid xs={12} item><p>Jenya : Russia</p></Grid>
+                    <Grid xs={12} item container>
+                        <Grid xs={6} item><a href='?'><LinkedInIcon fontSize='large' /></a></Grid>
+                        <Grid xs={6} item><a href='?'><GitHubIcon fontSize='large' /></a></Grid>
+                    </Grid>
                 </Grid>
-                <Grid item container xs={3}>
-                    <Grid xs={12} item>Serafim</Grid>
-                    <Grid xs={6} item><LinkedInIcon /></Grid>
-                    <Grid xs={6} item><GitHubIcon /></Grid>
+                <Grid container xs={2}>
+                    <Grid xs={12} item><p>Serhii : Ukraine</p></Grid>
+                    <Grid xs={12} item container>
+                        <Grid xs={6} item><a href='?'><LinkedInIcon fontSize='large' /></a></Grid>
+                        <Grid xs={6} item><a href='?'><GitHubIcon fontSize='large' /></a></Grid>
+                    </Grid>
+                </Grid>
+                <Grid container xs={2}>
+                    <Grid xs={12} item><p>Serafim : Ukraine</p></Grid>
+                    <Grid xs={12} item container>
+                        <Grid xs={6} item><a href='?'><LinkedInIcon fontSize='large' /></a></Grid>
+                        <Grid xs={6} item><a href='?'><GitHubIcon fontSize='large' /></a></Grid>
+                    </Grid>
+                </Grid>
+                <Grid container xs={2}>
+                    <Grid xs={12} item><p>Valera : Russia</p></Grid>
+                    <Grid xs={12} item container>
+                        <Grid xs={6} item><a href='?'><LinkedInIcon fontSize='large' /></a></Grid>
+                        <Grid xs={6} item><a href='?'><GitHubIcon fontSize='large' /></a></Grid>
+                    </Grid>
                 </Grid>
             </Grid>
-        </footer>
+        </footer >
     )
 }
 
