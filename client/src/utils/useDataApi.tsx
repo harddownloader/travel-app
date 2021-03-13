@@ -33,12 +33,12 @@ const useDataApi = (
 	initialData: Record<string, unknown>,
 ): any[] => {
 	const { ContextCountries, ContextLeng } = useContext(Context)
-	const [leng, setLeng] = ContextLeng
+	const [leng] = ContextLeng
 	const [url, setUrl] = useState(
 		`https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
 	)
 
-	const [countries, setCountries] = ContextCountries
+	const [, setCountries] = ContextCountries
 	const [state, dispatch] = useReducer(dataFetchReducer, {
 		isLoading: false,
 		isError: false,
@@ -72,7 +72,7 @@ const useDataApi = (
 		return () => {
 			didCancel = true
 		}
-	}, [url, leng])
+	}, [url, leng]) // eslint-disable-line
 
 	return [state, setUrl]
 }

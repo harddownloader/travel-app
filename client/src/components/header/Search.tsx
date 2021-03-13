@@ -4,6 +4,8 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import { Context } from '@/utils/Context.jsx'
 import axios from 'axios'
+import { CountryType } from '@/utils/typeCountry'
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		search: {
@@ -51,10 +53,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const Search = (): JSX.Element => {
 	const classes = useStyles()
 	const { ContextCountries, ContextLeng } = useContext(Context)
-	const [countries, setCountries] = ContextCountries
+	const [, setCountries] = ContextCountries
 	const [value, setValue] = useState('')
-	const [leng, setLeng] = ContextLeng
-	const handlerChange = (e: any) => {
+	const [leng] = ContextLeng
+	const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value)
 	}
 	useEffect(() => {
@@ -68,7 +70,7 @@ const Search = (): JSX.Element => {
 				if (!didCancel) {
 					setCountries(
 						result.data.filter(
-							(e: any) =>
+							(e: CountryType) =>
 								e.capital
 									.toLocaleLowerCase()
 									.includes(value.toLocaleLowerCase().trim()) ||
@@ -88,7 +90,7 @@ const Search = (): JSX.Element => {
 		return () => {
 			didCancel = true
 		}
-	}, [value, setValue])
+	}, [value, setValue]) // eslint-disable-line
 	return (
 		<div className={classes.search}>
 			<div className={classes.searchIcon}>
