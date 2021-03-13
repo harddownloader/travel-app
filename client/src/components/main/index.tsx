@@ -8,7 +8,9 @@ import { CountryType } from '@/utils/typeCountry'
 const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
-			margin: 0,
+			margin: 1,
+			paddingLeft: 5,
+			paddingRight: 5,
 			overflow: 'auto',
 			flexGrow: 1,
 		},

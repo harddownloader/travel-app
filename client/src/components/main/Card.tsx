@@ -13,6 +13,8 @@ const useStyles = makeStyles(() =>
 		root: {
 			cursor: 'pointer',
 			maxWidth: 345,
+			maxHeight: 430,
+			height: '100%',
 			color: '#000',
 			background: '#ccccf1',
 			transition: 'all .5s',
