@@ -1,7 +1,6 @@
-
 //let it be
 import App from '../components/App'
-import {BrowserRouter as Router} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import React, { useState } from 'react'
 import Header from '@/components/header/'
 import Main from '@/components/main/'
