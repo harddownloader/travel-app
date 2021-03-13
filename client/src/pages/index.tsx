@@ -1,7 +1,6 @@
-
 //let it be
 import App from '../components/App'
-import {BrowserRouter as Router} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import React, { useState } from 'react'
 import Header from '@/components/header/'
 import Main from '@/components/main/'
@@ -19,23 +18,18 @@ export default function Src(): JSX.Element {
 	const [leng, setLeng] = useState('ru')
 	const [data, setData] = useState([])
 
-
-// 	return (
-// 		<Router>
-// 			<App />
-// 		</Router>
-
-// 		<Context.Provider
-// 			value={{
-// 				ContextLeng: [leng, setLeng],
-// 				ContextCountries: [countries, setCountries],
-// 				ContextData: [data, setData],
-// 			}}>
-// 			<>
-// 				<Header />
-// 				<Main />
-// 				<Footer />
-// 			</>
-// 		</Context.Provider>
-// 	)
+	return (
+		<Context.Provider
+			value={{
+				ContextLeng: [leng, setLeng],
+				ContextCountries: [countries, setCountries],
+				ContextData: [data, setData],
+			}}>
+			<Router>
+				<>
+					<App />
+				</>
+			</Router>
+		</Context.Provider>
+	)
 }
