@@ -1,30 +1,51 @@
-import React, { useState } from 'react'
-import LanguageIcon from '@material-ui/icons/Language'
+import React, { useState, useContext, useEffect } from 'react'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import { SvgIcon } from '@material-ui/core'
-import LangOptions from './LangOptions'
+import getLangOptions from './LangOptions'
+import { Context } from '@/utils/Context.jsx'
+import IcoRussia from '@/assets/images/language-icons/russia.svg'
+import IcoEng from '@/assets/images/language-icons/united-kingdom.svg'
+import IcoGermany from '@/assets/images/language-icons/germany.svg'
 
 const Language = (): JSX.Element => {
-	//const classes = useStyles()
+	const { ContextLeng } = useContext(Context)
+	const [leng, setLeng] = ContextLeng
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [selectedIndex, setSelectedIndex] = useState(0)
+	const [langIco, setLangIco] = useState(<IcoRussia />)
+	const [langOptions, setLangOptions] = useState(getLangOptions(leng))
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
+
 	const handleMenuItemClick = (
 		event: React.MouseEvent<HTMLElement>,
 		index: number,
+		descriptor: string,
 	) => {
 		setSelectedIndex(index)
+		setLeng(descriptor)
 		setAnchorEl(null)
 	}
+	useEffect(() => {
+		setLangOptions(getLangOptions(leng))
+		setLangIco(
+			leng === 'ru' ? (
+				<IcoRussia />
+			) : leng === 'en' ? (
+				<IcoEng />
+			) : (
+				<IcoGermany />
+			),
+		)
+	}, [leng])
 
 	return (
 		<div>
@@ -33,7 +54,7 @@ const Language = (): JSX.Element => {
 				aria-controls='customized-menu'
 				aria-haspopup='true'
 				onClick={handleClick}>
-				<LanguageIcon />
+				<SvgIcon>{langIco}</SvgIcon>
 			</IconButton>
 			<Menu
 				id='customized-menu'
@@ -41,16 +62,18 @@ const Language = (): JSX.Element => {
 				keepMounted
 				open={Boolean(anchorEl)}
 				onClose={handleClose}>
-				{LangOptions.map((LangOptions, index) => (
+				{langOptions.map((langOptions, index) => (
 					<MenuItem
 						//	className={classes.root}
-						key={LangOptions.leng}
+						key={langOptions.leng}
 						selected={index === selectedIndex}
-						onClick={event => handleMenuItemClick(event, index)}>
+						onClick={event =>
+							handleMenuItemClick(event, index, langOptions.descriptor)
+						}>
 						<ListItemIcon>
-							<SvgIcon>{LangOptions.img}</SvgIcon>
+							<SvgIcon>{langOptions.img}</SvgIcon>
 						</ListItemIcon>
-						<ListItemText primary={LangOptions.leng} />
+						<ListItemText primary={langOptions.leng} />
 					</MenuItem>
 				))}
 			</Menu>
