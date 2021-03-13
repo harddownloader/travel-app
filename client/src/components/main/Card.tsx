@@ -47,17 +47,25 @@ export default function RecipeReviewCard({
 	imageimageUrl,
 	capital,
 	description,
+	id,
+	code,
 }: {
 	name: string
 	imageimageUrl: string
 	capital: string
 	description: string
+	id: string
+	code: string
 }): JSX.Element {
 	const classes = useStyles()
 	const shortInfo = ` ${description.substr(0, 200)}...`
 
 	return (
-		<Card className={classes.root}>
+		<Card
+			className={classes.root}
+			onPointerDown={() => {
+				console.log([id, code])
+			}}>
 			<CardHeader
 				avatar={
 					<Avatar aria-label='recipe' className={classes.avatar}>

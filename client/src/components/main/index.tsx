@@ -51,6 +51,8 @@ const Main = (): JSX.Element => {
 											capital={item.capital}
 											name={item.name}
 											description={item.description}
+											id={item.id}
+											code={item.ISOCode}
 										/>
 									</Grid>
 								))}

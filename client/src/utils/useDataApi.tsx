@@ -32,7 +32,8 @@ const useDataApi = (
 	initialUrl: string,
 	initialData: Record<string, unknown>,
 ): any[] => {
-	const { ContextCountries, ContextLeng } = useContext(Context)
+	const { ContextCountries, ContextLeng, ContextData } = useContext(Context)
+	const [, setData] = ContextData
 	const [leng] = ContextLeng
 	const [url, setUrl] = useState(
 		`https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
@@ -58,6 +59,7 @@ const useDataApi = (
 
 				if (!didCancel) {
 					dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
+					setData(result.data)
 					setCountries(result.data)
 				}
 			} catch (error) {

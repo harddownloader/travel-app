@@ -10,12 +10,14 @@ export default function Src(): JSX.Element {
 		hits: [],
 	})
 	const [leng, setLeng] = useState('ru')
+	const [data, setData] = useState([])
 
 	return (
 		<Context.Provider
 			value={{
 				ContextLeng: [leng, setLeng],
 				ContextCountries: [countries, setCountries],
+				ContextData: [data, setData],
 			}}>
 			<>
 				<Header />
