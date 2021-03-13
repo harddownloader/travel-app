@@ -1,6 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import axios from 'axios'
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useEffect, useReducer, useContext } from 'react'
+import { Context } from '@/utils/Context.jsx'
 
 const dataFetchReducer = (state: any, action: any) => {
 	switch (action.type) {
@@ -31,8 +32,13 @@ const useDataApi = (
 	initialUrl: string,
 	initialData: Record<string, unknown>,
 ): any[] => {
-	const [url, setUrl] = useState(initialUrl)
+	const { ContextCountries, ContextLeng } = useContext(Context)
+	const [leng, setLeng] = ContextLeng
+	const [url, setUrl] = useState(
+		`https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
+	)
 
+	const [countries, setCountries] = ContextCountries
 	const [state, dispatch] = useReducer(dataFetchReducer, {
 		isLoading: false,
 		isError: false,
@@ -40,6 +46,9 @@ const useDataApi = (
 	})
 
 	useEffect(() => {
+		setUrl(
+			`https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
+		)
 		let didCancel = false
 		const fetchData = async () => {
 			dispatch({ type: 'FETCH_INIT' })
@@ -49,6 +58,7 @@ const useDataApi = (
 
 				if (!didCancel) {
 					dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
+					setCountries(result.data)
 				}
 			} catch (error) {
 				if (!didCancel) {
@@ -62,7 +72,7 @@ const useDataApi = (
 		return () => {
 			didCancel = true
 		}
-	}, [url])
+	}, [url, leng])
 
 	return [state, setUrl]
 }

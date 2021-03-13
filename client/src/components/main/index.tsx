@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation, Pagination, EffectFade } from 'swiper'
 import 'swiper/swiper.scss'
@@ -7,17 +7,24 @@ import 'swiper/components/pagination/pagination.scss'
 import Card from './Card'
 import './swiper.css'
 import useDataApi from '@/utils/useDataApi'
-
+import { Context } from '@/utils/Context.jsx'
 SwiperCore.use([Navigation, Pagination, EffectFade])
 
 const Main = (): JSX.Element => {
+	const { ContextCountries, ContextLeng } = useContext(Context)
+	const [countries, setCountries] = ContextCountries
+	const [leng, setLeng] = ContextLeng
 	const [
 		{ data, isLoading, isError },
 		/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 		doFetch,
-	] = useDataApi('https://travel-app-demo.herokuapp.com/countries?lang=ru', {
-		hits: [],
-	})
+	] = useDataApi(
+		`	https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
+		{
+			hits: [],
+		},
+	)
+
 	return (
 		<Swiper
 			pagination={{
@@ -30,12 +37,12 @@ const Main = (): JSX.Element => {
 			}}
 			slidesPerColumnFill='row'
 			slidesPerView={1}
-			slidesPerColumn={3}
+			slidesPerColumn={1}
 			breakpoints={{
 				768: {
 					slidesPerView: 2,
 					spaceBetween: 40,
-					slidesPerColumn: 3,
+					slidesPerColumn: 2,
 				},
 				1280: {
 					slidesPerView: 3,
@@ -56,14 +63,15 @@ const Main = (): JSX.Element => {
 				<div>Loading ...</div>
 			) : (
 				<>
-					{!data.hits &&
-						data.map((item: Country) => (
-							<SwiperSlide
-								key={item.id}
-								onClick={() => {
-									console.log(data)
-								}}>
-								<Card />
+					{!countries.hits &&
+						countries.map((item: Country) => (
+							<SwiperSlide key={item.id}>
+								<Card
+									imageimageUrl={item.imageUrl}
+									capital={item.capital}
+									name={item.name}
+									description={item.description}
+								/>
 							</SwiperSlide>
 						))}
 				</>
