@@ -1,15 +1,30 @@
-// $var1: #60b6ee;
-// html,
-// body {
-//   height: 100vh;
-//   background-color: $var1;
-//   color: #fff;
-//   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+// video component
+@import "~video-react/styles/scss/video-react";
 
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
+
+html,
+body {
+  margin:0;
+  padding:0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  color: #fff;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#root{ 
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+width: 100%;
+height: 100%;
+}
+
+h1 {
+  color: #000;
+}
 
 // .container > h1 {
 //   text-align: center;
@@ -18,6 +33,6 @@
 //   background-image: url('assets/images/logo.png');
 // }
 
-// .container > img {
-//   border-radius: 50%;
-// }
+::-webkit-scrollbar{
+  display: none;
+}
