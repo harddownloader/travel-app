@@ -5,13 +5,14 @@ import { Context } from '@/utils/Context.jsx'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import { CountryType } from '@/utils/typeCountry'
+
 const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			margin: 1,
 			paddingLeft: 5,
 			paddingRight: 5,
-			overflow: 'auto',
+			height: '100%',
 			flexGrow: 1,
 		},
 	}),
@@ -30,7 +31,7 @@ const Main = (): JSX.Element => {
 		},
 		doFetch, // eslint-disable-line
 	] = useDataApi(
-		`	https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
+		`https://rsschool-travel-app-be.herokuapp.com/countries?lang=${leng}`,
 		{
 			hits: [],
 		},
@@ -57,7 +58,8 @@ const Main = (): JSX.Element => {
 											code={item.ISOCode}
 										/>
 									</Grid>
-								))}
+								))
+							}
 						</Grid>
 					</Grid>
 				</Grid>

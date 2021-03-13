@@ -8,6 +8,9 @@ import Main from '@/components/main/'
 import Video from '@/components/Video'
 import Currencies from '@/components/Currencies'
 
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+
+
 import '@/index.scss'
 import Footer from '@/components/footer/Footer'
 import { Context } from '@/utils/Context.jsx'
@@ -20,22 +23,24 @@ export default function Src(): JSX.Element {
 	const [data, setData] = useState([])
 
 
-// 	return (
-// 		<Router>
-// 			<App />
-// 		</Router>
+	return (
+		// <Router>
+		// 	<App />
+		// </Router>
 
-// 		<Context.Provider
-// 			value={{
-// 				ContextLeng: [leng, setLeng],
-// 				ContextCountries: [countries, setCountries],
-// 				ContextData: [data, setData],
-// 			}}>
-// 			<>
-// 				<Header />
-// 				<Main />
-// 				<Footer />
-// 			</>
-// 		</Context.Provider>
-// 	)
+		<Context.Provider
+			value={{
+				ContextLeng: [leng, setLeng],
+				ContextCountries: [countries, setCountries],
+				ContextData: [data, setData],
+			}}>
+			<>
+				<ScopedCssBaseline>
+					<Header />
+					<Main />
+					<Footer />
+				</ScopedCssBaseline>
+			</>
+		</Context.Provider>
+	)
 }
