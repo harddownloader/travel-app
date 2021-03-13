@@ -1,24 +1,33 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Header from '@/components/header/'
-import logo from '@/assets/images/logo.png'
+import Main from '@/components/main/'
 import Video from '@/components/Video'
 import Currencies from '@/components/Currencies'
+
 import '@/index.scss'
+import Footer from '@/components/footer/Footer'
+import { Context } from '@/utils/Context.jsx'
 
-const videoSrc = "https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+export default function Src(): JSX.Element {
+	const [countries, setCountries] = useState({
+		hits: [],
+	})
+	const [leng, setLeng] = useState('ru')
+	const [data, setData] = useState([])
 
-export default function src(): JSX.Element {
+
 	return (
-		<>
-			<Header />
-			<Currencies currency="EUR" />
-			<Video 
-				poster={logo}
-				src={videoSrc}
-			/>
-			<div className='container'>
-				<img src={logo} alt='' />
-			</div>
-		</>
+		<Context.Provider
+			value={{
+				ContextLeng: [leng, setLeng],
+				ContextCountries: [countries, setCountries],
+				ContextData: [data, setData],
+			}}>
+			<>
+				<Header />
+				<Main />
+				<Footer />
+			</>
+		</Context.Provider>
 	)
 }

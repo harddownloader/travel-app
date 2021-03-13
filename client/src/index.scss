@@ -13,12 +13,17 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-h1 {
-  color: #000;
+#root{ 
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+width: 100%;
+height: 100%;
 }
 
-#root{
-  width: 100%;
+h1 {
+  color: #000;
 }
 
 // .container > h1 {

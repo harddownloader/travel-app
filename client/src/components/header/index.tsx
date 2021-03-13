@@ -7,10 +7,13 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Search from './Search'
 import Language from './Language'
 
+const a = window.pageYOffset
+console.log(a)
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			paddingTop: '10px',
+			width: '100%',
 			flexGrow: 1,
 		},
 		menuButton: {

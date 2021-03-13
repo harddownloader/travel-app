@@ -1,23 +1,28 @@
 import React from 'react'
 import IcoRussia from '@/assets/images/language-icons/russia.svg'
 import IcoEng from '@/assets/images/language-icons/united-kingdom.svg'
-import IcoPoland from '@/assets/images/language-icons/poland.svg'
+import IcoGermany from '@/assets/images/language-icons/germany.svg'
 
-const options: {
+type Options = {
 	leng: string
 	img: JSX.Element
-}[] = [
+	descriptor: string
+}[]
+const options = (leng: string): Options => [
 	{
-		leng: 'English',
+		leng: leng === 'ru' ? 'Английский' : leng === 'en' ? 'English' : 'Englisch',
 		img: <IcoEng />,
+		descriptor: 'en',
 	},
 	{
-		leng: 'Russian',
+		leng: leng === 'ru' ? 'Русский' : leng === 'en' ? 'Russian' : 'Russisch',
 		img: <IcoRussia />,
+		descriptor: 'ru',
 	},
 	{
-		leng: 'Polish',
-		img: <IcoPoland />,
+		leng: leng === 'ru' ? 'Немецкий' : leng === 'en' ? 'Germany' : 'Deutsche',
+		img: <IcoGermany />,
+		descriptor: 'de',
 	},
 ]
 
