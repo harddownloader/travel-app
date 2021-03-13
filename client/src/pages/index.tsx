@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import Header from '@/components/header/'
 import Main from '@/components/main/'
+import Video from '@/components/Video'
+import Currencies from '@/components/Currencies'
+
 import '@/index.scss'
 import Footer from '@/components/footer/Footer'
 import { Context } from '@/utils/Context.jsx'
@@ -11,6 +14,7 @@ export default function Src(): JSX.Element {
 	})
 	const [leng, setLeng] = useState('ru')
 	const [data, setData] = useState([])
+
 
 	return (
 		<Context.Provider

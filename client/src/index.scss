@@ -1,4 +1,7 @@
-$var1: #60b6ee;
+// video component
+@import "~video-react/styles/scss/video-react";
+
+
 html,
 body {
   margin:0;
@@ -6,14 +9,10 @@ body {
   overflow: hidden;
   width: 100%;
   height: 100vh;
-  background-color: $var1;
   color: #fff;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
 #root{ 
   display: flex;
   flex-direction: column;
@@ -23,15 +22,16 @@ width: 100%;
 height: 100%;
 }
 
-.container > h1 {
-  text-align: center;
-  width: 100%;
-  display: block;
-  background-image: url('assets/images/logo.png');
+h1 {
+  color: #000;
 }
-.container > img {
-  border-radius: 50%;
-}
+
+// .container > h1 {
+//   text-align: center;
+//   width: 100%;
+//   display: block;
+//   background-image: url('assets/images/logo.png');
+// }
 
 ::-webkit-scrollbar{
   display: none;
