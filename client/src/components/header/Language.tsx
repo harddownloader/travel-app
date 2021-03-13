@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import LanguageIcon from '@material-ui/icons/Language'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -8,12 +7,16 @@ import IconButton from '@material-ui/core/IconButton'
 import { SvgIcon } from '@material-ui/core'
 import getLangOptions from './LangOptions'
 import { Context } from '@/utils/Context.jsx'
+import IcoRussia from '@/assets/images/language-icons/russia.svg'
+import IcoEng from '@/assets/images/language-icons/united-kingdom.svg'
+import IcoGermany from '@/assets/images/language-icons/germany.svg'
 
 const Language = (): JSX.Element => {
 	const { ContextLeng } = useContext(Context)
 	const [leng, setLeng] = ContextLeng
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [selectedIndex, setSelectedIndex] = useState(0)
+	const [langIco, setLangIco] = useState(<IcoRussia />)
 	const [langOptions, setLangOptions] = useState(getLangOptions(leng))
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -21,6 +24,7 @@ const Language = (): JSX.Element => {
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
+
 	const handleMenuItemClick = (
 		event: React.MouseEvent<HTMLElement>,
 		index: number,
@@ -28,10 +32,19 @@ const Language = (): JSX.Element => {
 	) => {
 		setSelectedIndex(index)
 		setLeng(descriptor)
-		//	setAnchorEl(null)
+		setAnchorEl(null)
 	}
 	useEffect(() => {
 		setLangOptions(getLangOptions(leng))
+		setLangIco(
+			leng === 'ru' ? (
+				<IcoRussia />
+			) : leng === 'en' ? (
+				<IcoEng />
+			) : (
+				<IcoGermany />
+			),
+		)
 	}, [leng])
 
 	return (
@@ -41,7 +54,7 @@ const Language = (): JSX.Element => {
 				aria-controls='customized-menu'
 				aria-haspopup='true'
 				onClick={handleClick}>
-				<LanguageIcon />
+				<SvgIcon>{langIco}</SvgIcon>
 			</IconButton>
 			<Menu
 				id='customized-menu'
