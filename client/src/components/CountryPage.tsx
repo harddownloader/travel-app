@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 //material ui
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid';
 
 //helpers
 import getCountryData from '../utils/getCountryData'
@@ -12,6 +13,7 @@ import About from './About'
 import PlacesList from './PlacesList'
 import Header from './header'
 import Footer from './footer/Footer'
+import Currencies from '@/components/Currencies'
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
@@ -55,8 +57,16 @@ const CountryPage: CountryPage = () => {
 			{loaded && (
 				<About description={countryData.description} name={countryData.name} />
 			)}
-            {loaded && (
+      {loaded && (
 				<PlacesList places={countryData.places} />
+			)}
+			 {loaded && (
+					<Grid container spacing={3}>
+						<Grid item lg={3} md={3} xs={12}>
+							<Currencies currency={countryData.currency}/>
+					 	</Grid>
+				 	</Grid>
+				
 			)}
 			<Footer />
 		</>
