@@ -1,44 +1,99 @@
 import React, {useState, useEffect} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 const axios = require('axios').default;
 
-// async function getСurrency() {
-//   try {
-//     const response = await axios.get('http://data.fixer.io/api/latest?access_key=12fac3db66ad1a7ca7c7f960cd117a3c');
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// kingfitnesstest@gmail.com
-// BN)&*$ORU4nt9n3et84uht45y
-
-// oleg gribov
-// pushkina 45
-// 65016
-// odessa
+const useStyles = makeStyles({
+  root: {},
+  currency: {},
+  currencyName: {},
+  currencyValue: {
+    paddingLeft: 10
+  }
+});
 
 function Currencies(props) {
+  const classes = useStyles();
+  const [currenciesList, setCurrenciesList] = useState([])
 
-  const currencyInfo = async () => {
-    {
-      try {
-        // ПОКАЗЫВАЕТ КУРС ТОЛЬКО К ЕВРО
-        const response = await axios.get('http://data.fixer.io/api/latest?access_key=12fac3db66ad1a7ca7c7f960cd117a3c&symbols=USD');
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const getCurrenctFromApi = (currencyBase, currencyTo) => {
+    const url = `https://free.currconv.com/api/v7/convert?q=${currencyBase}_${currencyTo}&compact=ultra&apiKey=0e7cc0bec5606f35f6a4`
+    return axios.get(url).then(response => {
+      // console.log('response.data', response.data)
+      return response.data
+    })
   }
 
+  useEffect(async () => {
+    if(!props.currency) return
+
+    // console.log('currency', props.currency)
+    const currencyBase = props.currency
+    const currencyTo = ['USD', 'EUR', 'RUB']
+    const dataFromApiUSD = await getCurrenctFromApi(currencyBase, currencyTo[0])
+    const dataFromApiEUR = await getCurrenctFromApi(currencyBase, currencyTo[1])
+    const dataFromApiRUB = await getCurrenctFromApi(currencyBase, currencyTo[2])
+
+    // console.log('dataFromApi', {
+    //   usd: dataFromApiUSD,
+    //   rub: dataFromApiRUB,
+    //   eur: dataFromApiEUR
+    // })
+
+    setCurrenciesList([
+      {
+        from: currencyBase,
+        to: currencyTo[0],
+        value: dataFromApiUSD[`${currencyBase}_${currencyTo[0]}`]
+      },
+      {
+        from: currencyBase,
+        to: currencyTo[1],
+        value: dataFromApiEUR[`${currencyBase}_${currencyTo[1]}`]
+      },
+      {
+        from: currencyBase,
+        to: currencyTo[2],
+        value: dataFromApiRUB[`${currencyBase}_${currencyTo[2]}`]
+      }
+    ])
+    
+  }, [props.currency])
+
+  // return (
+  //   <>
+  //     <div className="currencies">
+  //       {currenciesList.map((currency) => {
+  //         return (
+  //         <div className="currency" key={currency.to}>
+  //           <p className="currency-name">{currency.to}</p>
+  //           <p className="currency-value">{currency.value}</p>
+  //         </div>)
+          
+  //       })}
+  //     </div>
+  //   </>
+  // )
+
   return (
-    <>
-      <div className="currencies">
-        {currencyInfo()}
-      </div>
-    </>
-  )
+    <Card className={classes.root}>
+      <CardContent>
+        {currenciesList.map((currency) => {
+            return (
+            <div className={classes.currency} key={currency.to}>
+              <Typography variant="h5" component="h2" className={classes.currencyName}>
+                {currency.to}
+              </Typography>
+              <Typography color="textSecondary" className={classes.currencyValue}>
+                {currency.value}
+              </Typography>
+            </div>)
+          })}
+      </CardContent>
+    </Card>
+  );
 }
 
 export default Currencies;
