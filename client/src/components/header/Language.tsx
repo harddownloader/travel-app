@@ -3,37 +3,47 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import IconButton from '@material-ui/core/IconButton'
 import { SvgIcon } from '@material-ui/core'
 import getLangOptions from './LangOptions'
 import { Context } from '@/utils/Context.jsx'
 import IcoRussia from '@/assets/images/language-icons/russia.svg'
 import IcoEng from '@/assets/images/language-icons/united-kingdom.svg'
 import IcoGermany from '@/assets/images/language-icons/germany.svg'
+import Select from '@material-ui/core/Select'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		langSelect: {
+			'& .MuiInputBase-input': {
+				display: 'flex',
+			},
+		},
+		IcoSelect: {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+		},
+	}),
+)
 
 const Language = (): JSX.Element => {
+	const classes = useStyles()
 	const { ContextLeng } = useContext(Context)
 	const [leng, setLeng] = ContextLeng
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-	const [selectedIndex, setSelectedIndex] = useState(0)
 	const [langIco, setLangIco] = useState(<IcoRussia />)
 	const [langOptions, setLangOptions] = useState(getLangOptions(leng))
-	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
+	const [open, setOpen] = useState(false)
 	const handleClose = () => {
-		setAnchorEl(null)
+		setOpen(false)
+	}
+	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+		setLeng(event.target.value as string)
+	}
+	const handleOpen = () => {
+		setOpen(true)
 	}
 
-	const handleMenuItemClick = (
-		event: React.MouseEvent<HTMLElement>,
-		index: number,
-		descriptor: string,
-	) => {
-		setSelectedIndex(index)
-		setLeng(descriptor)
-		setAnchorEl(null)
-	}
 	useEffect(() => {
 		setLangOptions(getLangOptions(leng))
 		setLangIco(
@@ -45,18 +55,29 @@ const Language = (): JSX.Element => {
 				<IcoGermany />
 			),
 		)
-	}, [leng])
+	}, [leng, setLeng])
 
 	return (
-		<div>
-			<IconButton
-				aria-label='delete'
-				aria-controls='customized-menu'
-				aria-haspopup='true'
-				onClick={handleClick}>
-				<SvgIcon>{langIco}</SvgIcon>
-			</IconButton>
-			<Menu
+		<>
+			<Select
+				className={classes.langSelect}
+				labelId='demo-controlled-open-select-label'
+				id='customized-menu'
+				open={open}
+				onClose={handleClose}
+				onOpen={handleOpen}
+				value={leng}
+				onChange={handleChange}>
+				{langOptions.map((langOptions, index) => (
+					<MenuItem key={langOptions.leng} value={langOptions.descriptor}>
+						<ListItemIcon className={classes.IcoSelect}>
+							<SvgIcon>{langOptions.img}</SvgIcon>
+						</ListItemIcon>
+						<ListItemText primary={langOptions.leng} />
+					</MenuItem>
+				))}
+			</Select>
+			{/* <Menu
 				id='customized-menu'
 				anchorEl={anchorEl}
 				keepMounted
@@ -76,8 +97,8 @@ const Language = (): JSX.Element => {
 						<ListItemText primary={langOptions.leng} />
 					</MenuItem>
 				))}
-			</Menu>
-		</div>
+			</Menu> */}
+		</>
 	)
 }
 
