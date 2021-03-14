@@ -9,7 +9,6 @@ import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.scss'
 
 //Material UI
-import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';

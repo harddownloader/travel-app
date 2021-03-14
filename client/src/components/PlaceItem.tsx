@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   },
   card__cardHeading: {
     height: "4rem",
+    margin: '0',
     display: 'flex',
     flexDirection: "column",
     justifyContent: 'center'
@@ -33,7 +34,8 @@ const useStyles = makeStyles({
     overflowY: 'hidden',
     display: "-webkit-box",
     "-webkit-line-clamp": 8,
-    "-webkit-box-orient": "vertical"
+    "-webkit-box-orient": "vertical",
+    height: '16rem'
   }
 });
 

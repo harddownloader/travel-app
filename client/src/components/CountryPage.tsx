@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { Context } from '@/utils/Context.jsx'
 
 //material ui
 import Typography from '@material-ui/core/Typography'
@@ -12,9 +13,13 @@ import About from './About'
 import PlacesList from './PlacesList'
 import Header from './header'
 import Footer from './footer/Footer'
+import TimePicker from './TimePicker'
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
+	const { ContextLeng } = useContext(Context)
+	const [leng, ] = ContextLeng
+
 	const [countryData, setCountryData] = useState({
 		capital: '',
 		name: '',
@@ -26,17 +31,17 @@ const CountryPage: CountryPage = () => {
 	//load data and update dom
 	useEffect(() => {
 		const urlParams = new URLSearchParams(document.location.search);
-		let lang = urlParams.get('lang')
-		if (!lang) lang = 'en'
+		// let lang = urlParams.get('lang')
+		// if (!lang) lang = 'en'
 		const countryId = document.location.pathname.slice(1)
-		const countryDataPromise = getCountryData(countryId, lang)
+		const countryDataPromise = getCountryData(countryId, leng)
 		countryDataPromise
 			.then((result: any) => {
 				setCountryData(result)
 				setLoaded(true)
 			})
 			.catch((e: any) => console.log(e))
-	}, [])
+	}, [leng])
 
 	return (
 		<>
@@ -51,6 +56,9 @@ const CountryPage: CountryPage = () => {
 				<Typography variant='h3' component='h2'>
 					{countryData.capital}
 				</Typography>
+			)}
+			{loaded && (
+				<TimePicker capital={countryData.capital} language={leng}/>
 			)}
 			{loaded && (
 				<About description={countryData.description} name={countryData.name} />
