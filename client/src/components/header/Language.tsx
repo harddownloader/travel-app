@@ -14,15 +14,14 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		langSelect: {
-			'& .MuiInputBase-input': {
-				display: 'flex',
-			},
-		},
-		IcoSelect: {
+		SelectBox: {
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
+			paddingLeft: 10,
+		},
+		SelectInput: {
+			background: 'none',
 		},
 	}),
 )
@@ -34,14 +33,8 @@ const Language = (): JSX.Element => {
 	const [langIco, setLangIco] = useState(<IcoRussia />)
 	const [langOptions, setLangOptions] = useState(getLangOptions(leng))
 	const [open, setOpen] = useState(false)
-	const handleClose = () => {
-		setOpen(false)
-	}
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		setLeng(event.target.value as string)
-	}
-	const handleOpen = () => {
-		setOpen(true)
 	}
 
 	useEffect(() => {
@@ -58,47 +51,22 @@ const Language = (): JSX.Element => {
 	}, [leng, setLeng])
 
 	return (
-		<>
-			<Select
-				className={classes.langSelect}
-				labelId='demo-controlled-open-select-label'
-				id='customized-menu'
-				open={open}
-				onClose={handleClose}
-				onOpen={handleOpen}
+		<div className={classes.SelectBox}>
+			<select
 				value={leng}
-				onChange={handleChange}>
+				onChange={handleChange}
+				className={classes.SelectInput}>
 				{langOptions.map((langOptions, index) => (
-					<MenuItem key={langOptions.leng} value={langOptions.descriptor}>
-						<ListItemIcon className={classes.IcoSelect}>
-							<SvgIcon>{langOptions.img}</SvgIcon>
-						</ListItemIcon>
-						<ListItemText primary={langOptions.leng} />
-					</MenuItem>
+					<option key={langOptions.leng} value={langOptions.descriptor}>
+						{langOptions.leng}
+					</option>
+					// <MenuItem key={langOptions.leng} value={langOptions.descriptor}>
+					// 	<ListItemText primary={langOptions.descriptor} />
+					// </MenuItem>
 				))}
-			</Select>
-			{/* <Menu
-				id='customized-menu'
-				anchorEl={anchorEl}
-				keepMounted
-				open={Boolean(anchorEl)}
-				onClose={handleClose}>
-				{langOptions.map((langOptions, index) => (
-					<MenuItem
-						//	className={classes.root}
-						key={langOptions.leng}
-						selected={index === selectedIndex}
-						onClick={event =>
-							handleMenuItemClick(event, index, langOptions.descriptor)
-						}>
-						<ListItemIcon>
-							<SvgIcon>{langOptions.img}</SvgIcon>
-						</ListItemIcon>
-						<ListItemText primary={langOptions.leng} />
-					</MenuItem>
-				))}
-			</Menu> */}
-		</>
+			</select>
+			<SvgIcon>{langIco}</SvgIcon>
+		</div>
 	)
 }
 
