@@ -41,9 +41,7 @@ export default function Src(): JSX.Element {
 						</Route>
 						{/* country page */}
 						<Route path='/:id'>
-							<Header />
 							<CountryPage />
-							<Footer />
 						</Route>
 					</Switch>
 				{/* </ScopedCssBaseline> */}

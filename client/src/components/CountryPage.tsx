@@ -5,11 +5,13 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 //helpers
-import getCountryData from '../helpers/getCountryData'
+import getCountryData from '../utils/getCountryData'
 
 //components
 import About from './About'
 import PlacesList from './PlacesList'
+import Header from './header'
+import Footer from './footer/Footer'
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
@@ -23,8 +25,11 @@ const CountryPage: CountryPage = () => {
 
 	//load data and update dom
 	useEffect(() => {
+		const urlParams = new URLSearchParams(document.location.search);
+		let lang = urlParams.get('lang')
+		if (!lang) lang = 'en'
 		const countryId = document.location.pathname.slice(1)
-		const countryDataPromise = getCountryData(countryId)
+		const countryDataPromise = getCountryData(countryId, lang)
 		countryDataPromise
 			.then((result: any) => {
 				setCountryData(result)
@@ -35,6 +40,7 @@ const CountryPage: CountryPage = () => {
 
 	return (
 		<>
+			<Header />
 			{!loaded && <CircularProgress />}
 			{loaded && (
 				<Typography variant='h2' component='h1'>
@@ -52,6 +58,7 @@ const CountryPage: CountryPage = () => {
             {loaded && (
 				<PlacesList places={countryData.places} />
 			)}
+			<Footer />
 		</>
 	)
 }

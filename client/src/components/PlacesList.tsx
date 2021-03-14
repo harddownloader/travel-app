@@ -25,15 +25,13 @@ const useStyles = makeStyles({
   },
   placesList__button__next: {
     cursor: "pointer",
-    margin: '0 10px'
-    
+    margin: '0 10px'    
   },
   container: {
     height: '30px',
-    position: 'relative',
     display: 'flex',
-    justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    justifyContent: 'center'
   }
 });
 
@@ -55,8 +53,7 @@ const PlacesList: PlacesList = (props) => {
 		<>
 			<Typography variant='body1' component='p'>
 				PlacesList
-			</Typography>
-      
+			</Typography>      
 			<Swiper        
         navigation={{
           prevEl: '.prev',
@@ -64,9 +61,8 @@ const PlacesList: PlacesList = (props) => {
           disabledClass: 'text-dark-s border-dark-s',
         }}
 				spaceBetween={params.spaceBetween}
-				slidesPerView={params.slides}
-				onSlideChange={() => console.log('slide change')}
-				onSwiper={swiper => console.log(swiper)}>
+				slidesPerView={params.slides}				
+				>
 				{props.places.map((item: any) => {
           return (<SwiperSlide key={Math.random().toString()}>
             <PlaceItem 
@@ -76,16 +72,15 @@ const PlacesList: PlacesList = (props) => {
             />
             </SwiperSlide>)
         })}        
-        <Box className={classes.container}>
+        <div className={classes.container}>
         <div className={clsx(classes.placesList__button__prev, "prev")}>
           <NavigateBeforeIcon fontSize='large'/>
         </div>
         <div className={clsx(classes.placesList__button__next, "next")}>
           <NavigateNextIcon fontSize='large'/>
         </div>
-        </Box>			
-			</Swiper>  
-          
+        </div>			
+			</Swiper>          
 		</>
 	)
 }
