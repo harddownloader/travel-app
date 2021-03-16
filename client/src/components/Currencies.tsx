@@ -62,21 +62,6 @@ function Currencies(props) {
     
   }, [props.currency])
 
-  // return (
-  //   <>
-  //     <div className="currencies">
-  //       {currenciesList.map((currency) => {
-  //         return (
-  //         <div className="currency" key={currency.to}>
-  //           <p className="currency-name">{currency.to}</p>
-  //           <p className="currency-value">{currency.value}</p>
-  //         </div>)
-          
-  //       })}
-  //     </div>
-  //   </>
-  // )
-
   return (
     <Card className={classes.root}>
       <CardContent>

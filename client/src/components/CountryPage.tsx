@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles';
 
 //material ui
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+
 
 //helpers
 import getCountryData from '../utils/getCountryData'
@@ -15,8 +18,17 @@ import Header from './header'
 import Footer from './footer/Footer'
 import Currencies from '@/components/Currencies'
 
+const useStyles = makeStyles({
+  root: {},
+	countryAbout: {
+		marginBottom: 60
+	}
+});
+
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
+	const classes = useStyles();
+
 	const [countryData, setCountryData] = useState({
 		capital: '',
 		name: '',
@@ -44,30 +56,35 @@ const CountryPage: CountryPage = () => {
 		<>
 			<Header />
 			{!loaded && <CircularProgress />}
+			<Container maxWidth="lg">
 			{loaded && (
 				<Typography variant='h2' component='h1'>
 					{countryData.name}
 				</Typography>
 			)}
 			{loaded && (
+				<PlacesList places={countryData.places} />
+			)}
+			{loaded && (
 				<Typography variant='h3' component='h2'>
 					{countryData.capital}
 				</Typography>
 			)}
-			{loaded && (
+			{/* {loaded && (
 				<About description={countryData.description} name={countryData.name} />
-			)}
-      {loaded && (
-				<PlacesList places={countryData.places} />
-			)}
+			)} */}
+      
 			 {loaded && (
-					<Grid container spacing={3}>
+					<Grid container spacing={3} className={classes.countryAbout}>
+						<Grid item lg={9} md={9} xs={12}>
+							<About description={countryData.description} name={countryData.name} />
+						</Grid>
 						<Grid item lg={3} md={3} xs={12}>
 							<Currencies currency={countryData.currency}/>
 					 	</Grid>
 				 	</Grid>
-				
 			)}
+			</Container>
 			<Footer />
 		</>
 	)

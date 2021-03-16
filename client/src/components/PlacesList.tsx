@@ -9,8 +9,6 @@ import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.scss'
 
 //Material UI
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import { makeStyles } from '@material-ui/core/styles';
@@ -50,10 +48,7 @@ const PlacesList: PlacesList = (props) => {
   }, [windowWidth])
 
 	return (
-		<>
-			<Typography variant='body1' component='p'>
-				PlacesList
-			</Typography>      
+		<>     
 			<Swiper        
         navigation={{
           prevEl: '.prev',
@@ -65,10 +60,10 @@ const PlacesList: PlacesList = (props) => {
 				>
 				{props.places.map((item: any) => {
           return (<SwiperSlide key={Math.random().toString()}>
-            <PlaceItem 
-            name={item.name} 
-            description={item.description} 
-            photoUrl={item.photoUrl} 
+            <PlaceItem
+              name={item.name} 
+              description={item.description} 
+              photoUrl={item.photoUrl} 
             />
             </SwiperSlide>)
         })}        
