@@ -11,11 +11,16 @@ import 'swiper/swiper.scss'
 //Material UI
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 
 SwiperCore.use([Navigation]);
 
 const useStyles = makeStyles({
+  placesList: {
+    padding: '1rem',
+    backgroundColor: '#cccded'
+  },
   placesList__button__prev: {    
     cursor: "pointer",
     margin: '0 10px'
@@ -48,7 +53,7 @@ const PlacesList: PlacesList = (props) => {
   }, [windowWidth])
 
 	return (
-		<>     
+		<Card className={classes.placesList}>     
 			<Swiper        
         navigation={{
           prevEl: '.prev',
@@ -76,7 +81,7 @@ const PlacesList: PlacesList = (props) => {
         </div>
         </div>			
 			</Swiper>          
-		</>
+		</Card>
 	)
 }
 

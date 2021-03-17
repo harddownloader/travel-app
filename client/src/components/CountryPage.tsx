@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 
 
 //helpers
@@ -19,6 +20,11 @@ import Footer from './footer/Footer'
 import Currencies from '@/components/Currencies'
 
 const useStyles = makeStyles({
+	wrapper: {
+		padding: '1rem',
+		backgroundColor: '#cccded',
+		margin: '1rem 0'
+	},
   root: {},
 	countryAbout: {
 		marginBottom: 60
@@ -58,21 +64,20 @@ const CountryPage: CountryPage = () => {
 			{!loaded && <CircularProgress />}
 			<Container maxWidth="lg">
 			{loaded && (
-				<Typography variant='h2' component='h1'>
+				<Typography variant='h2' component='h1' align='center'>
 					{countryData.name}
 				</Typography>
 			)}
 			{loaded && (
 				<PlacesList places={countryData.places} />
 			)}
+			<Card className={classes.wrapper}>
 			{loaded && (
 				<Typography variant='h3' component='h2'>
 					{countryData.capital}
 				</Typography>
 			)}
-			{/* {loaded && (
-				<About description={countryData.description} name={countryData.name} />
-			)} */}
+
       
 			 {loaded && (
 					<Grid container spacing={3} className={classes.countryAbout}>
@@ -84,6 +89,7 @@ const CountryPage: CountryPage = () => {
 					 	</Grid>
 				 	</Grid>
 			)}
+			</Card>
 			</Container>
 			<Footer />
 		</>
