@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
+
+import { Context } from '@/utils/Context.jsx'
 import { makeStyles } from '@material-ui/core/styles';
 import Map from './map/Map'
 
@@ -19,6 +21,8 @@ import About from './About'
 import PlacesList from './PlacesList'
 import Header from './header'
 import Footer from './footer/Footer'
+import Weather from './Weather'
+
 import Currencies from '@/components/Currencies'
 import Video from '@/components/Video'
 
@@ -41,6 +45,7 @@ const useStyles = makeStyles({
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
 	const { ContextLeng } = useContext(Context)
+
 	const [leng,] = ContextLeng
 	const classes = useStyles();
 
@@ -68,7 +73,7 @@ const CountryPage: CountryPage = () => {
 			.then((result: any) => {
 				setCountryData(result)
 				setLoaded(true)
-				console.log(result)
+				// console.log(result)
 			})
 			.catch((e: any) => console.log(e))
 	}, [leng])
@@ -120,6 +125,7 @@ const CountryPage: CountryPage = () => {
 			{loaded && (
 				<PlacesList places={countryData.places} />
 			)}
+			{loaded && <Weather city={countryData.capital} lang={leng} coord={countryData.capitalLocation.coordinates}/>}
 			</Container>
 			{loaded && (
 				<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
