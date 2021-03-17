@@ -32,29 +32,24 @@ const Footer = () => {
   const autorsList = [
     {
       name: 'Vlas : Belarus',
-      github: '',
-      linkedin: ''
+      github: 'https://github.com/Exooo1',
+      linkedin: 'https://www.linkedin.com/in/vlas-maskalenchik-2321031ba/'
     },
     {
       name: 'Jenya : Russia',
-      github: '',
-      linkedin: ''
+      github: 'https://github.com/evgeshabond',
+      linkedin: 'https://www.linkedin.com/in/eugen-bondarenko-a068b217a/'
     },
     {
       name: 'Serhii : Ukraine',
-      github: '',
-      linkedin: ''
+      github: 'https://github.com/SerhiiShevchenkoOo',
+      linkedin: 'https://www.linkedin.com/in/shevchenko-serhii/'
     },
     {
       name: 'Serafim : Ukraine',
-      github: '',
-      linkedin: ''
+      github: 'https://github.com/harddownloader',
+      linkedin: 'https://www.linkedin.com/in/serafim-krutskevich-144163209/'
     },
-    {
-      name: 'Valera : Ukraine',
-      github: '',
-      linkedin: ''
-    }
   ]
 
   return (
