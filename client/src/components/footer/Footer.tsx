@@ -7,94 +7,132 @@ import { Icon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import logo from '@/assets/images/rs-school.png'
 
-const useStyles = makeStyles(() => ({
-	width: {
-		width: '20px',
-		height: '30px',
-	},
-	footer: {
-		width: '100%',
-		height: 170,
-		backgroundColor: '#000',
-		textAlign: 'center',
-		color: '#fff',
-	},
-	footerImg: {
-		borderRadius: 5,
-		width: 80,
-		height: 40,
-	},
-}))
+
+// flags
+import IcoRussia from '@/assets/images/language-icons/russia.svg'
+import IcoGermany from '@/assets/images/language-icons/germany.svg'
+import IcoBelarus from '@/assets/images/language-icons/belarus.svg'
+import IcoUkraine from '@/assets/images/language-icons/ukraine.svg'
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    textAlign: 'center',
+    backgroundColor: theme.palette.primary.dark,
+    color: '#fff',
+    
+  },
+  footerWrapp: {
+    justifyContent: 'space-around'
+  },
+  footerLogo: {
+    width: '6rem',
+    margin: '10px'
+  },
+  courseBlock: {
+
+  },
+  footerCourseTitle: {
+    margin: 0
+  },
+  socialImg: {
+    borderRadius: 5,
+    width: 80,
+    height: 40,
+    color: '#000'
+  },
+  authorName: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  authorCountry: {
+    padding: '0 10px'
+  },
+  authorContacts: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  copyright: {
+    width: '100%',
+    color: '#fff'
+  }
+}));
 
 const Footer = (): JSX.Element => {
 	const classes = useStyles()
 
-	const autorsList = [
-		{
-			name: 'Vlas : Belarus',
-			github: '',
-			linkedin: '',
-		},
-		{
-			name: 'Jenya : Russia',
-			github: '',
-			linkedin: '',
-		},
-		{
-			name: 'Serhii : Ukraine',
-			github: '',
-			linkedin: '',
-		},
-		{
-			name: 'Serafim : Ukraine',
-			github: '',
-			linkedin: '',
-		},
-		{
-			name: 'Valera : Ukraine',
-			github: '',
-			linkedin: '',
-		},
-	]
+  const autorsList = [
+    {
+      name: 'Vlas',
+      country: 'bel',
+      github: '',
+      linkedin: ''
+    },
+    {
+      name: 'Jenya',
+      country: 'ger',
+      github: '',
+      linkedin: ''
+    },
+    {
+      name: 'Serhii',
+      country: 'ua',
+      github: '',
+      linkedin: ''
+    },
+    {
+      name: 'Serafim',
+      country: 'ua',
+      github: '',
+      linkedin: ''
+    }
+  ]
 
-	return (
-		<footer className='footer'>
-			<Grid container>
-				<Grid container>
-					<Grid item xs={1}>
-						<p>The Rolling Scopes School.</p>
-						<Icon>
-							<img className={classes.width} src={logo} />
-						</Icon>
-					</Grid>
+  return (
+    <footer className={classes.root}>
+      <Grid container spacing={1} className={classes.footerWrapp}>
+        <Grid item xs={1} className={classes.courseBlock}>
+          <Icon><img className={classes.footerLogo} src={logo} /></Icon>
+          <p className={classes.footerCourseTitle}>The Rolling Scopes School.</p>
+        </Grid>
 
-					{autorsList.map(autor => {
-						return (
-							<Grid key={autor.name} xs={2} item>
-								<p>{autor.name}</p>
-								<Grid xs={6} item>
-									<a href={autor.linkedin}>
-										<LinkedInIcon
-											fontSize='large'
-											className={classes.footerImg}
-										/>
-									</a>
-								</Grid>
-								<Grid xs={6} item>
-									<a href={autor.github}>
-										<GitHubIcon
-											fontSize='large'
-											className={classes.footerImg}
-										/>
-									</a>
-								</Grid>
-							</Grid>
-						)
-					})}
-				</Grid>
-			</Grid>
-		</footer>
-	)
+        {autorsList.map((autor, index) => {
+          let countryFlag = <></>
+          if(autor.country === 'ger') {
+            countryFlag = <IcoGermany width="32" />
+          } else if (autor.country === 'ru') {
+            countryFlag = <IcoRussia width="32"  />
+          } else if (autor.country === 'bel') {
+            countryFlag = <IcoBelarus width="32" />
+          } else if (autor.country === 'ua') {
+            countryFlag = <IcoUkraine width="32" />
+          }
+
+          return (
+            <Grid key={autor.name} xs={2} item>
+              <p className={classes.authorName}>{autor.name} <span className={classes.authorCountry}>{countryFlag}</span></p>
+              <div className={classes.authorContacts}>
+                <a href={autor.linkedin}>
+                  <LinkedInIcon fontSize='large' className={classes.socialImg} />
+                </a>
+                <a href={autor.github}>
+                  <GitHubIcon fontSize='large' className={classes.socialImg} />
+                </a>
+              </div>
+            </Grid>
+          )
+        })}
+      </Grid>
+
+      <Grid container spacing={1}>
+        <Grid item xs={12} className={classes.copyright}>
+          <p className="copyright">@Copyright 2021</p>
+        </Grid>
+      </Grid>
+    </footer>
+  )
 }
 
 export default Footer

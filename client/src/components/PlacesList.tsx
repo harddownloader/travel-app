@@ -10,30 +10,34 @@ import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/swiper.scss'
 
 //Material UI
-//import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext'
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
-import { makeStyles } from '@material-ui/core/styles'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
 
 SwiperCore.use([Navigation])
 
 const useStyles = makeStyles({
-	placesList__button__prev: {
-		cursor: 'pointer',
-		margin: '0 10px',
-	},
-	placesList__button__next: {
-		cursor: 'pointer',
-		margin: '0 10px',
-	},
-	container: {
-		height: '30px',
-		display: 'flex',
-		width: '100%',
-		justifyContent: 'center',
-	},
-})
+  placesList: {
+    padding: '1rem',
+    backgroundColor: '#cccded',
+    margin: '20px 0'
+  },
+  placesList__button__prev: {    
+    cursor: "pointer",
+    margin: '10px'
+    
+  },
+  placesList__button__next: {
+    cursor: "pointer",
+    margin: '10px'    
+  },
+  container: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center'
+  }
+});
 
 type PlacesList = (props: any) => JSX.Element
 const PlacesList: PlacesList = props => {
@@ -50,39 +54,34 @@ const PlacesList: PlacesList = props => {
 	}, [windowWidth]) // eslint-disable-line
 
 	return (
-		<>
-			<Typography variant='body1' component='p'>
-				PlacesList
-			</Typography>
-			<Swiper
-				navigation={{
-					prevEl: '.prev',
-					nextEl: '.next',
-					disabledClass: 'text-dark-s border-dark-s',
-				}}
+		<Card className={classes.placesList}>     
+			<Swiper        
+        navigation={{
+          prevEl: '.prev',
+          nextEl: '.next',
+          disabledClass: 'text-dark-s border-dark-s',
+        }}
 				spaceBetween={params.spaceBetween}
 				slidesPerView={params.slides}>
 				{props.places.map((item: any) => {
-					return (
-						<SwiperSlide key={Math.random().toString()}>
-							<PlaceItem
-								name={item.name}
-								description={item.description}
-								photoUrl={item.photoUrl}
-							/>
-						</SwiperSlide>
-					)
-				})}
-				<div className={classes.container}>
-					<div className={clsx(classes.placesList__button__prev, 'prev')}>
-						<NavigateBeforeIcon fontSize='large' />
-					</div>
-					<div className={clsx(classes.placesList__button__next, 'next')}>
-						<NavigateNextIcon fontSize='large' />
-					</div>
-				</div>
-			</Swiper>
-		</>
+          return (<SwiperSlide key={Math.random().toString()}>
+            <PlaceItem
+              name={item.name} 
+              description={item.description} 
+              photoUrl={item.photoUrl} 
+            />
+            </SwiperSlide>)
+        })}        
+        <div className={classes.container}>
+        <div className={clsx(classes.placesList__button__prev, "prev")}>
+          <NavigateBeforeIcon fontSize='large'/>
+        </div>
+        <div className={clsx(classes.placesList__button__next, "next")}>
+          <NavigateNextIcon fontSize='large'/>
+        </div>
+        </div>			
+			</Swiper>          
+		</Card>
 	)
 }
 
