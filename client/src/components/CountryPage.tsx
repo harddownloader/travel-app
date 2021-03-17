@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 
-import { Context } from '@/utils/Context.jsx'
 import { makeStyles } from '@material-ui/core/styles';
 import Map from './map/Map'
 

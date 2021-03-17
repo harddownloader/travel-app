@@ -71,7 +71,7 @@ const Footer = (): JSX.Element => {
       linkedin: 'https://www.linkedin.com/in/vlas-maskalenchik-2321031ba/'
     },
     {
-      name: 'Jenya',
+      name: 'Eugen',
       country: 'ger',
       github: 'https://github.com/evgeshabond',
       linkedin: 'https://www.linkedin.com/in/eugen-bondarenko-a068b217a/'

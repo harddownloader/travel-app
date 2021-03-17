@@ -4,6 +4,9 @@ import { Source, Layer } from 'react-map-gl'
 import Container from '@material-ui/core/Container';
 import maps from '@/assets/images/marker.png'
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+// jsons with locations data
 import US from './usa.json'
 import IT from './italy.json'
 import FR from './france.json'
@@ -102,36 +105,40 @@ const Maps = ({ coordinate, ISOCode }: any) => {
 
 
     return (
-        <Container maxWidth="lg" className={classes.wrapper} >
-            <ReactMapGl
-                className={classes.wrapperMap}
-                transitionDuration={1000}
-                transitionInterpolator={new FlyToInterpolator()}
-                mapStyle={'mapbox://styles/mapbox/dark-v9'}
-                mapboxApiAccessToken={'pk.eyJ1IjoiZXhvb29sIiwiYSI6ImNrbTdqanVrazB5bWMycWtuaGJsejZkdWMifQ.O3bZI32GskLsf18DNkKlXA'}
-                {...viewport}
-                onViewportChange={(viewport: any) => setViewport(viewport)} >
-                <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
-                    <img src={maps} width={'20px'} height={'20px'} />
-                </Marker>
-                <FullscreenControl style={fullscreenControlStyle} />
-                <NavigationControl style={navControlStyle} />
-                <Source
-                    id='oregonjson'
-                    type='geojson'
-                    data={coordinateCountry} />
-                <Layer id='anything' type='fill' source='oregonjson'
-                    paint={{
-                        "fill-color": 'red',
-                        "fill-opacity": 0.25,
-                    }}
-                />
-            </ReactMapGl>
+        <Container maxWidth="lg">
+            <Grid container spacing={3}>
+                <Grid item lg={12} md={12} xs={12}>
+                    <ReactMapGl
+                        className={classes.wrapperMap}
+                        transitionDuration={1000}
+                        transitionInterpolator={new FlyToInterpolator()}
+                        mapStyle={'mapbox://styles/mapbox/dark-v9'}
+                        mapboxApiAccessToken={'pk.eyJ1IjoiZXhvb29sIiwiYSI6ImNrbTdqanVrazB5bWMycWtuaGJsejZkdWMifQ.O3bZI32GskLsf18DNkKlXA'}
+                        {...viewport}
+                        onViewportChange={(viewport: any) => setViewport(viewport)}
+                    >
+                        <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
+                            <img src={maps} width={'20px'} height={'20px'} />
+                        </Marker>
+                        <FullscreenControl style={fullscreenControlStyle} />
+                        <NavigationControl style={navControlStyle} />
+                        <Source
+                            id='oregonjson'
+                            type='geojson'
+                            data={coordinateCountry}
+                        />
+                        <Layer id='anything' type='fill' source='oregonjson'
+                            paint={{
+                                "fill-color": 'red',
+                                "fill-opacity": 0.25,
+                            }}
+                        />
+                    </ReactMapGl>
+                </Grid>
+            </Grid>
+            
         </Container>
-
-
     )
-
 }
 
 export default Maps;
