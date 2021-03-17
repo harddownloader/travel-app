@@ -13,7 +13,8 @@ import About from './About'
 import PlacesList from './PlacesList'
 import Header from './header'
 import Footer from './footer/Footer'
-import TimePicker from './TimePicker'
+import Weather from './Weather'
+import { ProgressPlugin } from 'webpack'
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
@@ -37,6 +38,7 @@ const CountryPage: CountryPage = () => {
 			.then((result: any) => {
 				setCountryData(result)
 				setLoaded(true)
+				
 			})
 			.catch((e: any) => console.log(e))
 	}, [leng])
@@ -56,14 +58,12 @@ const CountryPage: CountryPage = () => {
 				</Typography>
 			)}
 			{loaded && (
-				<TimePicker capital={countryData.capital} language={leng}/>
-			)}
-			{loaded && (
 				<About description={countryData.description} name={countryData.name} />
 			)}
             {loaded && (
 				<PlacesList places={countryData.places} />
 			)}
+			{loaded && <Weather city={countryData.capital} lang={leng} coord={countryData.capitalLocation.coordinates}/>}
 			<Footer />
 		</>
 	)
