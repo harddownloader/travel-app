@@ -117,6 +117,14 @@ const CountryPage: CountryPage = () => {
 						<Grid item lg={12} md={12} xs={12}>
 							<Video src={countryData.videoUrl} />
 					 	</Grid>
+						 
+						 <Grid item lg={3} md={3} xs={12}>
+						 	<Weather city={countryData.capital} lang={leng} coord={countryData.capitalLocation.coordinates}/>
+					 	</Grid>
+
+						<Grid item lg={9} md={9} xs={12}>
+						 	<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
+					 	</Grid>
 				 	</Grid>
 			)}
 			
@@ -124,11 +132,7 @@ const CountryPage: CountryPage = () => {
 			{loaded && (
 				<PlacesList places={countryData.places} />
 			)}
-			{loaded && <Weather city={countryData.capital} lang={leng} coord={countryData.capitalLocation.coordinates}/>}
 			</Container>
-			{loaded && (
-				<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
-			)}
 			<Footer />
 		</>
 	)

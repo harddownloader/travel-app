@@ -73,7 +73,7 @@ const Maps = ({ coordinate, ISOCode }: any) => {
         latitude: coordinate[0],
         longitude: coordinate[1],
         zoom: 3,
-        width: '1000px',
+        width: '100%',
         height: '400px',
         // pitch: 50
     })

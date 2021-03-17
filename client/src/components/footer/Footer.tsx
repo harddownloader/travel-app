@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     backgroundColor: theme.palette.primary.dark,
     color: '#fff',
-    
+    marginTop: '60px'
   },
   footerWrapp: {
     justifyContent: 'space-around'
@@ -93,7 +93,7 @@ const Footer = (): JSX.Element => {
   return (
     <footer className={classes.root}>
       <Grid container spacing={1} className={classes.footerWrapp}>
-        <Grid item xs={1} className={classes.courseBlock}>
+        <Grid item lg={1} md={1} xs={12} className={classes.courseBlock}>
           <Icon><img className={classes.footerLogo} src={logo} /></Icon>
           <p className={classes.footerCourseTitle}>The Rolling Scopes School.</p>
         </Grid>
@@ -111,7 +111,7 @@ const Footer = (): JSX.Element => {
           }
 
           return (
-            <Grid key={autor.name} xs={2} item>
+            <Grid key={autor.name} lg={2} md={2} xs={12} item>
               <p className={classes.authorName}>{autor.name} <span className={classes.authorCountry}>{countryFlag}</span></p>
               <div className={classes.authorContacts}>
                 <a href={autor.linkedin}>

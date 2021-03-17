@@ -24,7 +24,7 @@ const atmosphereList = ['mist', 'smoke', 'haze', 'dust', 'fog', 'sand', 'dust', 
 
 const useStyles = makeStyles({
   weather: {
-    width: '16rem',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
