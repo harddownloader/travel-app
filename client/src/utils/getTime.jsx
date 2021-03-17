@@ -15,7 +15,7 @@ const getTime = (language, timeZone) => {
     minute: '2-digit',
     second: '2-digit',
   }).format(date)
-  return time
+  return time.charAt(0).toUpperCase() + time.slice(1)
 }
 
 export default getTime
