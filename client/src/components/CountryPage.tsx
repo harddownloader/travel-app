@@ -29,6 +29,10 @@ const useStyles = makeStyles({
   root: {},
 	countryAbout: {
 		marginBottom: 60
+	},
+	countryMainImage: {
+		margin: '20px 0',
+		width: '100%'
 	}
 });
 
@@ -60,6 +64,8 @@ const CountryPage: CountryPage = () => {
 			.catch((e: any) => console.log(e))
 	}, [leng])
 
+	console.log('countryData', countryData)
+
 	return (
 		<>
 			<Header />
@@ -71,8 +77,13 @@ const CountryPage: CountryPage = () => {
 				</Typography>
 			)}
 			{loaded && (
-				<PlacesList places={countryData.places} />
+				<Grid container spacing={0} >
+						<Grid item lg={12} md={12} xs={12}>
+							<img src={countryData.imageUrl} className={classes.countryMainImage}/>
+						</Grid>
+				</Grid>
 			)}
+			
 			<Card className={classes.wrapper}>
 			{loaded && (
 				<Typography variant='h3' component='h2'>
@@ -91,7 +102,12 @@ const CountryPage: CountryPage = () => {
 					 	</Grid>
 				 	</Grid>
 			)}
+
+			
 			</Card>
+			{loaded && (
+				<PlacesList places={countryData.places} />
+			)}
 			</Container>
 			<Footer />
 		</>
