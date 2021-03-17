@@ -31,8 +31,6 @@ const CountryPage: CountryPage = () => {
 	//load data and update dom
 	useEffect(() => {
 		const urlParams = new URLSearchParams(document.location.search);
-		// let lang = urlParams.get('lang')
-		// if (!lang) lang = 'en'
 		const countryId = document.location.pathname.slice(1)
 		const countryDataPromise = getCountryData(countryId, leng)
 		countryDataPromise
