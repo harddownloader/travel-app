@@ -19,19 +19,19 @@ SwiperCore.use([Navigation]);
 const useStyles = makeStyles({
   placesList: {
     padding: '1rem',
-    backgroundColor: '#cccded'
+    backgroundColor: '#cccded',
+    margin: '20px 0'
   },
   placesList__button__prev: {    
     cursor: "pointer",
-    margin: '0 10px'
+    margin: '10px'
     
   },
   placesList__button__next: {
     cursor: "pointer",
-    margin: '0 10px'    
+    margin: '10px'    
   },
   container: {
-    height: '30px',
     display: 'flex',
     width: '100%',
     justifyContent: 'center'
