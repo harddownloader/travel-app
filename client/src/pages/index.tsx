@@ -17,7 +17,6 @@ export default function Src(): JSX.Element {
 		hits: [],
 	})
 
-
 	// console.log('pathname', document.location.pathname)
 
 	const [leng, setLeng] = useState('ru')
@@ -32,18 +31,20 @@ export default function Src(): JSX.Element {
 			}}>
 			<Router>
 				{/* <ScopedCssBaseline> */}
-					<Switch>
-						{/* home page */}
-						<Route exact path='/'>
+				<Switch>
+					{/* home page */}
+					<Route exact path='/'>
+						<div className='main-root'>
 							<Header />
 							<Cards />
-							<Footer />
-						</Route>
-						{/* country page */}
-						<Route path='/:id'>
-							<CountryPage />
-						</Route>
-					</Switch>
+						</div>
+						<Footer />
+					</Route>
+					{/* country page */}
+					<Route path='/:id'>
+						<CountryPage />
+					</Route>
+				</Switch>
 				{/* </ScopedCssBaseline> */}
 			</Router>
 		</Context.Provider>

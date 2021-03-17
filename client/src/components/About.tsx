@@ -1,7 +1,9 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 type About = (props: any) => JSX.Element
+
 const About:About = (props) => {
   return (
     <>

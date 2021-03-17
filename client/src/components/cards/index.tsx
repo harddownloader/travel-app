@@ -58,8 +58,7 @@ const Main = (): JSX.Element => {
 											code={item.ISOCode}
 										/>
 									</Grid>
-								))
-							}
+								))}
 						</Grid>
 					</Grid>
 				</Grid>

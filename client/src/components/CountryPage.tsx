@@ -5,10 +5,10 @@ import Map from './map/Map'
 //material ui
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
-
 
 //helpers
 import getCountryData from '../utils/getCountryData'
@@ -30,6 +30,10 @@ const useStyles = makeStyles({
 	root: {},
 	countryAbout: {
 		marginBottom: 60
+	},
+	countryMainImage: {
+		margin: '20px 0',
+		width: '100%'
 	}
 });
 
@@ -50,10 +54,12 @@ const CountryPage: CountryPage = () => {
 		},
 		ISOCode:''
 	})
+  
 	const [loaded, setLoaded] = useState(false)
 
 	//load data and update dom
 	useEffect(() => {
+
 		const urlParams = new URLSearchParams(document.location.search);
 		const countryId = document.location.pathname.slice(1)
 		const countryDataPromise = getCountryData(countryId, leng)
@@ -66,38 +72,50 @@ const CountryPage: CountryPage = () => {
 			.catch((e: any) => console.log(e))
 	}, [leng])
 
+	console.log('countryData', countryData)
+
 	return (
 		<>
 			<Header />
 			{!loaded && <CircularProgress />}
 			<Container maxWidth="lg">
-				{loaded && (
-					<Typography variant='h2' component='h1' align='center'>
-						{countryData.name}
-					</Typography>
-				)}
-				{loaded && (
-					<PlacesList places={countryData.places} />
-				)}
-				<Card className={classes.wrapper}>
-					{loaded && (
-						<Typography variant='h3' component='h2'>
-							{countryData.capital}
-						</Typography>
-					)}
 
-
-					{loaded && (
-						<Grid container spacing={3} className={classes.countryAbout}>
-							<Grid item lg={9} md={9} xs={12}>
-								<About description={countryData.description} name={countryData.name} />
-							</Grid>
-							<Grid item lg={3} md={3} xs={12}>
-								<Currencies currency={countryData.currency} />
-							</Grid>
+			{loaded && (
+				<Typography variant='h2' component='h1' align='center'>
+					{countryData.name}
+				</Typography>
+			)}
+			{loaded && (
+				<Grid container spacing={0} >
+						<Grid item lg={12} md={12} xs={12}>
+							<img src={countryData.imageUrl} className={classes.countryMainImage}/>
 						</Grid>
-					)}
-				</Card>
+				</Grid>
+			)}
+			
+			<Card className={classes.wrapper}>
+			{loaded && (
+				<Typography variant='h3' component='h2'>
+					{countryData.capital}
+				</Typography>
+			)}
+      
+			 {loaded && (
+					<Grid container spacing={3} className={classes.countryAbout}>
+						<Grid item lg={9} md={9} xs={12}>
+							<About description={countryData.description} name={countryData.name} />
+						</Grid>
+						<Grid item lg={3} md={3} xs={12}>
+							<Currencies currency={countryData.currency}/>
+					 	</Grid>
+				 	</Grid>
+			)}
+
+			
+			</Card>
+			{loaded && (
+				<PlacesList places={countryData.places} />
+			)}
 			</Container>
 			{loaded && (
 				<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
