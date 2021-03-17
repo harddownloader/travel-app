@@ -25,7 +25,8 @@ const CountryPage: CountryPage = () => {
 		capital: '',
 		name: '',
 		description: '',
-        places: ''
+    places: '',
+		capitalLocation: {coordinates: ''}
 	})
 	const [loaded, setLoaded] = useState(false)
 

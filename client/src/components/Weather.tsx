@@ -48,10 +48,6 @@ const Weather = (props: any) => {
   const [data, setData] = useState({}) 
   const classes = useStyles()
 
-  // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${props.coord[0]}&lon=${props.coord[1]}&lang=en&appid=57781f6b98433e378452bea1ff327bd2&units=metric`;
-  // const urlWithLangParam = `https://api.openweathermap.org/data/2.5/weather?lat=${props.coord[0]}&lon=${props.coord[1]}&lang=${props.lang}&appid=57781f6b98433e378452bea1ff327bd2&units=metric`;
-
-
   useEffect(() => {
     if (props.city.length < 1) return
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${props.coord[0]}&lon=${props.coord[1]}&lang=en&appid=57781f6b98433e378452bea1ff327bd2&units=metric`;
