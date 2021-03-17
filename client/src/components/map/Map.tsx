@@ -1,16 +1,91 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMapGl, { Marker, NavigationControl, FlyToInterpolator, FullscreenControl, } from 'react-map-gl'
-import ReactMapboxGL, { Source, Layer } from 'react-map-gl'
-const Maps = () => {
+import { Source, Layer } from 'react-map-gl'
+import Container from '@material-ui/core/Container';
+import maps from '@/assets/images/marker.png'
+import { makeStyles } from '@material-ui/core/styles';
+import US from './usa.json'
+import IT from './italy.json'
+import FR from './france.json'
+import BY from './belarus.json'
+import DE from './german.json'
+import JP from './japan.json'
+import RU from './russia.json'
+import UA from './ua.json'
+
+
+const useStyles = makeStyles((theme) => ({
+    wrapper: {
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    wrapperMap: {
+        width: '100%',
+        overflow: 'auto'
+    }
+}));
+
+const Maps = ({ coordinate, ISOCode }: any) => {
+
+    let coordinateCountry = null
+
+    switch (ISOCode) {
+        case 'US': {
+            coordinateCountry = US
+            break;
+        }
+        case 'IT': {
+            coordinateCountry = IT
+            break;
+        }
+        case 'RU': {
+            coordinateCountry = RU
+            break;
+        }
+        case 'UA': {
+            coordinateCountry = UA
+            break;
+        }
+        case 'BY': {
+            coordinateCountry = BY
+            break;
+        }
+        case 'DE': {
+            coordinateCountry = DE
+            break;
+        }
+        case 'JP': {
+            coordinateCountry = JP
+            break;
+        }
+        case 'FR': {
+            coordinateCountry = FR
+            break;
+        }
+    }
 
     const [viewport, setViewport] = useState({
-        latitude: 53.7169,
-        longitude: 27.9776,
-        zoom: 8,
+        latitude: coordinate[0],
+        longitude: coordinate[1],
+        zoom: 3,
         width: '1000px',
         height: '400px',
         // pitch: 50
     })
+
+    const [location, setLocation] = useState({
+        latitude: 0,
+        longitude: 0,
+    })
+
+    useEffect(() => {
+        setLocation({
+            latitude: coordinate[0],
+            longitude: coordinate[1]
+        })
+    }, [])
 
     const navControlStyle = {
         right: 10,
@@ -22,32 +97,39 @@ const Maps = () => {
         top: 5
     };
 
+    const classes = useStyles();
+
+
+
     return (
-        <div style={{ display: 'block', maxWidth: '300px', maxHeight: '200px' }}>
+        <Container maxWidth="lg" className={classes.wrapper} >
             <ReactMapGl
+                className={classes.wrapperMap}
                 transitionDuration={1000}
                 transitionInterpolator={new FlyToInterpolator()}
                 mapStyle={'mapbox://styles/mapbox/dark-v9'}
                 mapboxApiAccessToken={'pk.eyJ1IjoiZXhvb29sIiwiYSI6ImNrbTdqanVrazB5bWMycWtuaGJsejZkdWMifQ.O3bZI32GskLsf18DNkKlXA'}
                 {...viewport}
                 onViewportChange={(viewport: any) => setViewport(viewport)} >
-                <Marker latitude={53.9045} longitude={27.5615} offsetTop={(-viewport.zoom * 5) / 2}>
-                    <p>here</p>
-                    {/* <img src='https://i.pinimg.com/originals/22/11/f8/2211f8cc5b35a7cd807586328bc33e35.png' width={viewport.zoom * 5} height={viewport.zoom * 5} /> */}
+                <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
+                    <img src={maps} width={'20px'} height={'20px'} />
                 </Marker>
                 <FullscreenControl style={fullscreenControlStyle} />
                 <NavigationControl style={navControlStyle} />
                 <Source
                     id='oregonjson'
                     type='geojson'
-                    data='https://raw.githubusercontent.com/glynnbird/usstatesgeojson/master/alaska.geojson' />
+                    data={coordinateCountry} />
                 <Layer id='anything' type='fill' source='oregonjson'
                     paint={{
-                        "fill-color": '#228b22',
-                    }} />
+                        "fill-color": 'red',
+                        "fill-opacity": 0.25,
+                    }}
+                />
             </ReactMapGl>
+        </Container>
 
-        </div>
+
     )
 
 }

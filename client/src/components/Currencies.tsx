@@ -1,44 +1,110 @@
-import React, {useState, useEffect} from 'react';
-const axios = require('axios').default;
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable  @typescript-eslint/explicit-module-boundary-types */
 
-// async function getСurrency() {
-//   try {
-//     const response = await axios.get('http://data.fixer.io/api/latest?access_key=12fac3db66ad1a7ca7c7f960cd117a3c');
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import axios from 'axios'
 
-// kingfitnesstest@gmail.com
-// BN)&*$ORU4nt9n3et84uht45y
+const useStyles = makeStyles({
+	root: {},
+	currency: {},
+	currencyName: {},
+	currencyValue: {
+		paddingLeft: 10,
+	},
+})
 
-// oleg gribov
-// pushkina 45
-// 65016
-// odessa
+function Currencies(props: any) {
+	const classes = useStyles()
+	const arr:
+		| {
+				from: string
+				to: string
+				value: string
+		  }[]
+		| [] = []
+	const [currenciesList, setCurrenciesList] = useState(arr)
 
-function Currencies(props) {
+	const getCurrenctFromApi = (currencyBase: any, currencyTo: any) => {
+		const url = `https://free.currconv.com/api/v7/convert?q=${currencyBase}_${currencyTo}&compact=ultra&apiKey=0e7cc0bec5606f35f6a4`
+		return axios.get(url).then(response => {
+			// console.log('response.data', response.data)
+			return response.data
+		})
+	}
 
-  const currencyInfo = async () => {
-    {
-      try {
-        // ПОКАЗЫВАЕТ КУРС ТОЛЬКО К ЕВРО
-        const response = await axios.get('http://data.fixer.io/api/latest?access_key=12fac3db66ad1a7ca7c7f960cd117a3c&symbols=USD');
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
+	useEffect(() => {
+		const test = async () => {
+			if (!props.currency) return
+			// console.log('currency', props.currency)
+			const currencyBase = props.currency
+			const currencyTo = ['USD', 'EUR', 'RUB']
+			const dataFromApiUSD = await getCurrenctFromApi(
+				currencyBase,
+				currencyTo[0],
+			)
+			const dataFromApiEUR = await getCurrenctFromApi(
+				currencyBase,
+				currencyTo[1],
+			)
+			const dataFromApiRUB = await getCurrenctFromApi(
+				currencyBase,
+				currencyTo[2],
+			)
+			const hy: {
+				from: string
+				to: string
+				value: string
+			}[] = [
+				{
+					from: currencyBase,
+					to: currencyTo[0],
+					value: dataFromApiUSD[`${currencyBase}_${currencyTo[0]}`],
+				},
+				{
+					from: currencyBase,
+					to: currencyTo[1],
+					value: dataFromApiEUR[`${currencyBase}_${currencyTo[1]}`],
+				},
+				{
+					from: currencyBase,
+					to: currencyTo[2],
+					value: dataFromApiRUB[`${currencyBase}_${currencyTo[2]}`],
+				},
+			]
+			setCurrenciesList(hy)
+		}
+		test()
+	}, [props.currency])
 
-  return (
-    <>
-      <div className="currencies">
-        {currencyInfo()}
-      </div>
-    </>
-  )
+
+	return (
+		<Card className={classes.root}>
+			<CardContent>
+				{currenciesList.map((currency: any) => {
+					return (
+						<div className={classes.currency} key={currency.to}>
+							<Typography
+								variant='h5'
+								component='h2'
+								className={classes.currencyName}>
+								{currency.to}
+							</Typography>
+							<Typography
+								color='textSecondary'
+								className={classes.currencyValue}>
+								{currency.value}
+							</Typography>
+						</div>
+					)
+				})}
+			</CardContent>
+		</Card>
+	)
 }
 
-export default Currencies;
+export default Currencies
+

@@ -1,7 +1,8 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from 'react'
 
-import { Card, CardContent, CardMedia, Typography, Box, ListItemAvatar, Hidden } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, CardMedia, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({  
   card: {
@@ -40,12 +41,13 @@ const useStyles = makeStyles({
 });
 
 const clapText = (text: string, count: number) => {
-  return text.slice(0, count) + '...'
+	return text.slice(0, count) + '...'
 }
 
 type PlaceItem = (props: any) => JSX.Element
-const PlaceItem: PlaceItem = (props) => {
-const classes=useStyles()
+const PlaceItem: PlaceItem = props => {
+	const classes = useStyles()
+
 
   return (
     <Card className={classes.card}>
@@ -62,6 +64,7 @@ const classes=useStyles()
       variant="h5"
       component="h3"
       className={classes.card__cardHeading}
+      align='center'
       >
       {props.name}
       </Typography>

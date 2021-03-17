@@ -26,11 +26,13 @@ $ yarn start
 
 Serve frontend with hot reload:
 ```
+
 $ yarn dev
 ```
 
 Build frontend:
 ```
+
 $ yarn build
 ```
 
