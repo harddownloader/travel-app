@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		inputRoot: {
 			color: 'inherit',
 		},
-		search: {
+		searchInput: {
 			padding: theme.spacing(1, 1, 1, 0),
 			// vertical padding + font size from searchIcon
 			paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -83,7 +83,7 @@ const Search = (): JSX.Element => {
 				placeholder=''
 				classes={{
 					root: classes.inputRoot,
-					input: classes.search,
+					input: classes.searchInput,
 				}}
 				inputProps={{ 'aria-label': 'search', autoFocus: true }}
 			/>
