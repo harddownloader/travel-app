@@ -74,18 +74,7 @@ const Weather = (props: any) => {
     .catch((e) => {console.log(e)})  
     
   }, [props])
-
-  useEffect(() => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${props.coord[0]}&lon=${props.coord[1]}&lang=en&appid=57781f6b98433e378452bea1ff327bd2&units=metric`;
-    if (props.city.length < 1) return
-    const dataPromise = axios.get(url)    
-    dataPromise.then((res) => {
-      console.log(props.coord)
-      console.log(res)
-      setData({...data, description: res.data.weather[0].description })
-    })
-    .catch((e) => {}) 
-  }, [props])
+ 
 
 
   return (
