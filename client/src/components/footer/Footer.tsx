@@ -94,7 +94,9 @@ const Footer = (): JSX.Element => {
     <footer className={classes.root}>
       <Grid container spacing={1} className={classes.footerWrapp}>
         <Grid item lg={1} md={1} xs={12} className={classes.courseBlock}>
-          <Icon><img className={classes.footerLogo} src={logo} /></Icon>
+          <a href="https://rs.school/react/">
+            <Icon><img className={classes.footerLogo} src={logo} /></Icon>
+          </a>
           <p className={classes.footerCourseTitle}>The Rolling Scopes School.</p>
         </Grid>
 

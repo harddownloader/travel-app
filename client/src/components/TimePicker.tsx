@@ -29,10 +29,10 @@ const timeZones = {
 
 type TimePicker = (props) => JSX.Element 
 const TimePicker:TimePicker = (props) => {
-  let [time, setTime] = useState(getTime(props.language,timeZones[props.city]))
+  const [time, setTime] = useState(getTime(props.language,timeZones[props.city]))
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setTime(getTime(props.language,timeZones[props.city]))
     }, 100)
     return () => clearInterval(interval)
