@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
 import './footer.scss'
-import { Grid } from '@material-ui/core';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import { Icon } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core'
+import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import { Icon } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import logo from '@/assets/images/rs-school.png'
+
 
 // flags
 import IcoRussia from '@/assets/images/language-icons/russia.svg'
@@ -59,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Footer = () => {
-  const classes = useStyles();
+const Footer = (): JSX.Element => {
+	const classes = useStyles()
 
   const autorsList = [
     {
@@ -134,4 +135,4 @@ const Footer = () => {
   )
 }
 
-export default Footer;
+export default Footer

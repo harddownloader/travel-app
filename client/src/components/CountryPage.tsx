@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 //material ui
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
-
 
 //helpers
 import getCountryData from '../utils/getCountryData'
@@ -49,10 +49,12 @@ const CountryPage: CountryPage = () => {
     places: '',
 		currency: ''
 	})
+  
 	const [loaded, setLoaded] = useState(false)
 
 	//load data and update dom
 	useEffect(() => {
+
 		const urlParams = new URLSearchParams(document.location.search);
 		const countryId = document.location.pathname.slice(1)
 		const countryDataPromise = getCountryData(countryId, leng)
@@ -90,7 +92,6 @@ const CountryPage: CountryPage = () => {
 					{countryData.capital}
 				</Typography>
 			)}
-
       
 			 {loaded && (
 					<Grid container spacing={3} className={classes.countryAbout}>

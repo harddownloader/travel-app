@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles(() =>
 	createStyles({
 		listStyles: {
-			textDecoration: 'none'
+			textDecoration: 'none',
 		},
 		root: {
 			cursor: 'pointer',
@@ -72,20 +72,26 @@ export default function RecipeReviewCard({
 				className={classes.root}
 				onPointerDown={() => {
 					console.log([id, code])
-				}}
-				>
+				}}>
 				<CardHeader
 					avatar={
 						<Avatar aria-label='recipe' className={classes.avatar}>
-							R
+							{code}
 						</Avatar>
 					}
 					title={name}
 					subheader={capital}
 				/>
-				<CardMedia className={classes.media} image={imageimageUrl} title={name} />
+				<CardMedia
+					className={classes.media}
+					image={imageimageUrl}
+					title={name}
+				/>
 				<CardContent>
-					<Typography variant='body2' className={classes.cardInfo} component='p'>
+					<Typography
+						variant='body2'
+						className={classes.cardInfo}
+						component='p'>
 						{shortInfo}
 					</Typography>
 				</CardContent>
