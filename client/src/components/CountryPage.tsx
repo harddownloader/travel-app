@@ -20,6 +20,7 @@ import PlacesList from './PlacesList'
 import Header from './header'
 import Footer from './footer/Footer'
 import Currencies from '@/components/Currencies'
+import Video from '@/components/Video'
 
 const useStyles = makeStyles({
 	wrapper: {
@@ -108,9 +109,12 @@ const CountryPage: CountryPage = () => {
 						<Grid item lg={3} md={3} xs={12}>
 							<Currencies currency={countryData.currency}/>
 					 	</Grid>
+
+						<Grid item lg={12} md={12} xs={12}>
+							<Video src={countryData.videoUrl} />
+					 	</Grid>
 				 	</Grid>
 			)}
-
 			
 			</Card>
 			{loaded && (

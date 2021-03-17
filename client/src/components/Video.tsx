@@ -10,7 +10,7 @@ import { Player } from 'video-react'
  * logo - path to logo (or file from "import")
  * src - path to video
  */
-const H = (props: { poster: string; src: string }): JSX.Element => {
+const Video = (props: { poster: string; src: string }): JSX.Element => {
 	return <Player playsInline poster={props.poster} src={props.src} />
 }
-export default H
+export default Video

@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMapGl, { Marker, NavigationControl, FlyToInterpolator, FullscreenControl, } from 'react-map-gl'
 import { Source, Layer } from 'react-map-gl'
-import map from './belarus.json'
 import Container from '@material-ui/core/Container';
-import maps from '../../assets/images/marker.png'
+import maps from '@/assets/images/marker.png'
 import { makeStyles } from '@material-ui/core/styles';
 import US from './usa.json'
 import IT from './italy.json'
@@ -76,6 +75,18 @@ const Maps = ({ coordinate, ISOCode }: any) => {
         // pitch: 50
     })
 
+    const [location, setLocation] = useState({
+        latitude: 0,
+        longitude: 0,
+    })
+
+    useEffect(() => {
+        setLocation({
+            latitude: coordinate[0],
+            longitude: coordinate[1]
+        })
+    }, [])
+
     const navControlStyle = {
         right: 10,
         top: 60
@@ -88,6 +99,8 @@ const Maps = ({ coordinate, ISOCode }: any) => {
 
     const classes = useStyles();
 
+
+
     return (
         <Container maxWidth="lg" className={classes.wrapper} >
             <ReactMapGl
@@ -98,7 +111,7 @@ const Maps = ({ coordinate, ISOCode }: any) => {
                 mapboxApiAccessToken={'pk.eyJ1IjoiZXhvb29sIiwiYSI6ImNrbTdqanVrazB5bWMycWtuaGJsejZkdWMifQ.O3bZI32GskLsf18DNkKlXA'}
                 {...viewport}
                 onViewportChange={(viewport: any) => setViewport(viewport)} >
-                <Marker latitude={viewport.latitude} longitude={viewport.longitude} offsetLeft={-20} offsetTop={-10}>
+                <Marker latitude={location.latitude} longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
                     <img src={maps} width={'20px'} height={'20px'} />
                 </Marker>
                 <FullscreenControl style={fullscreenControlStyle} />
