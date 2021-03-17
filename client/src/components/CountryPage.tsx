@@ -42,7 +42,8 @@ const CountryPage: CountryPage = () => {
 		capital: '',
 		name: '',
 		description: '',
-        places: ''
+    places: '',
+		currency: ''
 	})
 	const [loaded, setLoaded] = useState(false)
 
