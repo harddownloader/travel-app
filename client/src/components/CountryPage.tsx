@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 
 //material ui
@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card';
 
 //helpers
 import getCountryData from '../utils/getCountryData'
+import { Context } from '@/utils/Context.jsx'
 
 //components
 import About from './About'
@@ -33,6 +34,8 @@ const useStyles = makeStyles({
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
+	const { ContextLeng } = useContext(Context)
+	const [leng, ] = ContextLeng
 	const classes = useStyles();
 
 	const [countryData, setCountryData] = useState({
@@ -46,17 +49,15 @@ const CountryPage: CountryPage = () => {
 	//load data and update dom
 	useEffect(() => {
 		const urlParams = new URLSearchParams(document.location.search);
-		let lang = urlParams.get('lang')
-		if (!lang) lang = 'en'
 		const countryId = document.location.pathname.slice(1)
-		const countryDataPromise = getCountryData(countryId, lang)
+		const countryDataPromise = getCountryData(countryId, leng)
 		countryDataPromise
 			.then((result: any) => {
 				setCountryData(result)
 				setLoaded(true)
 			})
 			.catch((e: any) => console.log(e))
-	}, [])
+	}, [leng])
 
 	return (
 		<>
