@@ -29,7 +29,7 @@ function Currencies(props: any) {
 	const [currenciesList, setCurrenciesList] = useState(arr)
 
 	const getCurrenctFromApi = (currencyBase: any, currencyTo: any) => {
-		const url = `https://free.currconv.com/api/v7/convert?q=${currencyBase}_${currencyTo}&compact=ultra&apiKey=0e7cc0bec5606f35f6a4`
+		const url = `https://free.currconv.com/api/v7/convert?q=${currencyBase}_${currencyTo}&compact=ultra&apiKey=b6583c5ef13216beb703`
 		return axios.get(url).then(response => {
 			// console.log('response.data', response.data)
 			return response.data
