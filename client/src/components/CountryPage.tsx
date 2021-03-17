@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import Map from './map/Map'
 
 //material ui
 import Typography from '@material-ui/core/Typography'
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
 		backgroundColor: '#cccded',
 		margin: '1rem 0'
 	},
-  root: {},
+	root: {},
 	countryAbout: {
 		marginBottom: 60
 	},
@@ -39,15 +40,19 @@ const useStyles = makeStyles({
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
 	const { ContextLeng } = useContext(Context)
-	const [leng, ] = ContextLeng
+	const [leng,] = ContextLeng
 	const classes = useStyles();
 
 	const [countryData, setCountryData] = useState({
 		capital: '',
 		name: '',
 		description: '',
-    places: '',
-		currency: ''
+		places: '',
+		currency: '',
+		capitalLocation: {
+			coordinates: []
+		},
+		ISOCode:''
 	})
   
 	const [loaded, setLoaded] = useState(false)
@@ -62,6 +67,7 @@ const CountryPage: CountryPage = () => {
 			.then((result: any) => {
 				setCountryData(result)
 				setLoaded(true)
+				console.log(result)
 			})
 			.catch((e: any) => console.log(e))
 	}, [leng])
@@ -73,6 +79,7 @@ const CountryPage: CountryPage = () => {
 			<Header />
 			{!loaded && <CircularProgress />}
 			<Container maxWidth="lg">
+
 			{loaded && (
 				<Typography variant='h2' component='h1' align='center'>
 					{countryData.name}
@@ -110,6 +117,9 @@ const CountryPage: CountryPage = () => {
 				<PlacesList places={countryData.places} />
 			)}
 			</Container>
+			{loaded && (
+				<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
+			)}
 			<Footer />
 		</>
 	)
