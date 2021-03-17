@@ -12,23 +12,23 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],
 		alias: {
-			// '@': path.join(__dirname, 'src'),
-			// '@assets': path.join(__dirname, 'src/assets'),
-			// '@component': path.join(__dirname, 'src/script/component/'),
-			// '@utils': path.join(__dirname, 'src/script/utils/'),
+			'@': path.join(__dirname, 'src'),
+			// '@assets': path.join(__dirname, 'src/assets/'),
+			// '@component': path.join(__dirname, 'src/component/'),
+			// '@pages': path.join(__dirname, 'src/pages/'),
 			// '@style': path.join(__dirname, 'src/script/styles-tw/'),
 		},
 	},
 
 	plugins: [
 		new ESLintPlugin({
-			extensions: ['.js', '.ts', '.tsx'],
+			extensions: ['.js', '.ts', '.tsx', 'jsx'],
 		}),
 		new ForkTsCheckerWebpackPlugin({ async: false }),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './public/index.html',
-				favicon: './public/favicon.icon',
+			favicon: './public/favicon.ico',
 		}),
 	],
 	module: {
@@ -69,6 +69,13 @@ module.exports = {
 				// },
 			},
 			{
+				test: /\.(png|jpg|gif|webp)$/,
+				type: 'asset/resource',
+				generator: {
+					filename: './assets/images/[hash][ext][query]',
+				},
+			},
+			{
 				test: /\.(ttf|woff|woff2|eot)$/,
 				type: 'asset/resource',
 				generator: {
@@ -76,11 +83,9 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.(png|jpg|svg|gif|webp)$/,
-				type: 'asset/resource',
-				generator: {
-					filename: './assets/images/[hash][ext][query]',
-				},
+				test: /\.svg$/,
+				//	type: 'asset/resource',
+				use: ['@svgr/webpack'],
 			},
 		],
 	},
