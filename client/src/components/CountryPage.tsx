@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import Map from './map/Map'
 
 //material ui
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
-
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
+import Card from '@material-ui/core/Card'
 
 //helpers
 import getCountryData from '../utils/getCountryData'
@@ -29,24 +28,27 @@ const useStyles = makeStyles({
 	wrapper: {
 		padding: '1rem',
 		backgroundColor: '#cccded',
-		margin: '1rem 0'
+		margin: '1rem 0',
 	},
 	root: {},
 	countryAbout: {
-		marginBottom: 60
+		marginBottom: 60,
 	},
 	countryMainImage: {
 		margin: '20px 0',
-		width: '100%'
+		width: '100%',
+	},
+	widgetContainer: {
+
 	}
-});
+})
 
 type CountryPage = () => JSX.Element
 const CountryPage: CountryPage = () => {
 	const { ContextLeng } = useContext(Context)
 
-	const [leng,] = ContextLeng
-	const classes = useStyles();
+	const [leng] = ContextLeng
+	const classes = useStyles()
 
 	const [countryData, setCountryData] = useState({
 		capital: '',
@@ -55,17 +57,16 @@ const CountryPage: CountryPage = () => {
 		places: '',
 		currency: '',
 		capitalLocation: {
-			coordinates: []
+			coordinates: [],
 		},
-		ISOCode:''
+		ISOCode: '',
 	})
-  
+
 	const [loaded, setLoaded] = useState(false)
 
 	//load data and update dom
 	useEffect(() => {
-
-		const urlParams = new URLSearchParams(document.location.search);
+		const urlParams = new URLSearchParams(document.location.search)
 		const countryId = document.location.pathname.slice(1)
 		const countryDataPromise = getCountryData(countryId, leng)
 		countryDataPromise
@@ -83,55 +84,69 @@ const CountryPage: CountryPage = () => {
 		<>
 			<Header />
 			{!loaded && <CircularProgress />}
-			<Container maxWidth="lg">
-
-			{loaded && (
-				<Typography variant='h2' component='h1' align='center'>
-					{countryData.name}
-				</Typography>
-			)}
-			{loaded && (
-				<Grid container spacing={0} >
+			<Container maxWidth='lg'>
+				{loaded && (
+					<Typography variant='h2' component='h1' align='center'>
+						{countryData.name}
+					</Typography>
+				)}
+				{loaded && (
+					<Grid container spacing={0}>
 						<Grid item lg={12} md={12} xs={12}>
-							<img src={countryData.imageUrl} className={classes.countryMainImage}/>
+							<img
+								src={countryData.imageUrl}
+								className={classes.countryMainImage}
+							/>
 						</Grid>
-				</Grid>
-			)}
-			
-			<Card className={classes.wrapper}>
-			{loaded && (
-				<Typography variant='h3' component='h2'>
-					{countryData.capital}
-				</Typography>
-			)}
-      
-			 {loaded && (
-					<Grid container spacing={3} className={classes.countryAbout}>
-						<Grid item lg={9} md={9} xs={12}>
-							<About description={countryData.description} name={countryData.name} />
+					</Grid>
+				)}
+
+				<Card className={classes.wrapper}>
+					{loaded && (
+						<Typography variant='h3' component='h2'>
+							{countryData.capital}
+						</Typography>
+					)}
+
+					{loaded && (
+						<Grid container spacing={3} className={classes.countryAbout}>
+							<Grid item lg={9} md={9} xs={12}>
+								<About
+									description={countryData.description}
+									name={countryData.name}
+								/>
+							</Grid>
+
+							<Grid item container lg={3} md={3} sm={12} xs={12} spacing={1}>
+							
+								<Grid item md={12} lg={12} sm={6} xs={6} >
+									<Currencies currency={countryData.currency} />
+								</Grid>
+								
+								<Grid item md={12} lg={12} sm={6} xs={6} >
+									<Weather
+										city={countryData.capital}
+										lang={leng}
+										coord={countryData.capitalLocation.coordinates}
+									/>	
+																
+								</Grid>
+							</Grid>
+
+							<Grid item lg={12} md={12} xs={12}>
+								<Video src={countryData.videoUrl} />
+							</Grid>
+
+							<Grid item lg={12} md={12} xs={12}>
+								<Map
+									coordinate={countryData.capitalLocation.coordinates}
+									ISOCode={countryData.ISOCode}
+								/>
+							</Grid>
 						</Grid>
-						<Grid item lg={3} md={3} xs={12}>
-							<Currencies currency={countryData.currency}/>
-					 	</Grid>
-
-						<Grid item lg={12} md={12} xs={12}>
-							<Video src={countryData.videoUrl} />
-					 	</Grid>
-						 
-						 <Grid item lg={3} md={3} xs={12}>
-						 	<Weather city={countryData.capital} lang={leng} coord={countryData.capitalLocation.coordinates}/>
-					 	</Grid>
-
-						<Grid item lg={9} md={9} xs={12}>
-						 	<Map coordinate={countryData.capitalLocation.coordinates} ISOCode={countryData.ISOCode} />
-					 	</Grid>
-				 	</Grid>
-			)}
-			
-			</Card>
-			{loaded && (
-				<PlacesList places={countryData.places} />
-			)}
+					)}
+				</Card>
+				{loaded && <PlacesList places={countryData.places} />}
 			</Container>
 			<Footer />
 		</>
