@@ -15,9 +15,7 @@ const useStyles = makeStyles(() =>
 			alignItems: 'center',
 			paddingLeft: 10,
 		},
-		SelectInput: {
-			background: 'none',
-		},
+		selectLangs: {},
 	}),
 )
 
@@ -49,7 +47,7 @@ const Language = (): JSX.Element => {
 			<select
 				value={leng}
 				onChange={handleChange}
-				className={classes.SelectInput}>
+				className={classes.selectLangs + ' selectLangs'}>
 				{langOptions.map(langOptions => (
 					<option key={langOptions.leng} value={langOptions.descriptor}>
 						{langOptions.leng}
