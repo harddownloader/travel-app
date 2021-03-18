@@ -104,7 +104,6 @@ const Footer = (): JSX.Element => {
         </Grid>
         <Grid item container className={classes.courseBlock} xs={12}>
           {autorsList.map((item) => {
-            console.log(item)
             return (
               <Grid item xs={3} className={classes.author}>
                 <div>
