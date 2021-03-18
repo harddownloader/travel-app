@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import { Context } from '@/utils/Context.jsx'
 import { CountryType } from '@/utils/typeCountry'
+import Speaker from '@/components/header/Speaker'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -75,7 +75,8 @@ const Search = (): JSX.Element => {
 	return (
 		<div className={classes.search}>
 			<div className={classes.searchIcon}>
-				<SearchIcon />
+				{/* <SearchIcon /> */}
+				<Speaker value={value} setValue={setValue} />
 			</div>
 			<InputBase
 				value={value}

@@ -31,4 +31,5 @@ const Logo = (): JSX.Element => {
 		</IconButton>
 	)
 }
+
 export default Logo
