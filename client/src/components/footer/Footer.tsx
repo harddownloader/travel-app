@@ -1,20 +1,14 @@
 import React from 'react'
 import './footer.scss'
-import { Grid } from '@material-ui/core'
-import LinkedInIcon from '@material-ui/icons/LinkedIn'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import { Icon } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+
 import logo from '@/assets/images/rs-school.png'
 
 //material ui components
-
-
-// flags
-import IcoRussia from '@/assets/images/language-icons/russia.svg'
-import IcoGermany from '@/assets/images/language-icons/germany.svg'
-import IcoBelarus from '@/assets/images/language-icons/belarus.svg'
-import IcoUkraine from '@/assets/images/language-icons/ukraine.svg'
+import { Grid } from '@material-ui/core'
+import { Icon } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
 const autorsList = [
   {
