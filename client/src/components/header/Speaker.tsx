@@ -1,58 +1,59 @@
-import React, { useState, useEffect } from 'react';
-// import { Context } from '@/utils/Context';
-import SpeechRecognition, {
-	useSpeechRecognition,
-} from 'react-speech-recognition';
+import React, { useState, useEffect } from 'react'
+import "regenerator-runtime/runtime.js";
 import SearchIcon from '@material-ui/icons/Search'
+import SpeechRecognition, {
+    useSpeechRecognition,
+} from 'react-speech-recognition'
+import MicroIcon from '@material-ui/icons/Mic'
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 
 
-// const Speaker = ({value, setValue}: any) => {
-// 	// const { contextValue, ContextisActive } = useContext(Context);
-// 	// const [speakValue, setSpeakValue] = contextValue;
-// 	const [isActive, setIsActive] = useState(false);
-// 	const { transcript, setTranscript } = useSpeechRecognition();
+const useStyles = makeStyles(() =>
+	createStyles({
+		root: {},
+		microIcon: {
+			cursor: 'pointer',
+			transition: 'all 0.5s',
+			'&:hover': {
+				opacity: 1
+			}
 
-// 	// useEffect(() => {
-// 	// 	isActive && console.log('текущая фраза:', transcript);
-// 	// 	setValue(transcript);
-// 	// }, [transcript]);
+		},
+		microIconDeactive: {
+			opacity: 0.5
+		},
+		microIconActive: {
+			opacity: 1
+		}
+	}),
+)
 
-// 	const setSpeach = () => {
-// 		setIsActive(!isActive);
-// 		!isActive
-// 			? SpeechRecognition.startListening({ continuous: true })
-// 			: SpeechRecognition.stopListening();
-// 	};
+const Speaker = ({ value, setValue, lang }: any) => {
 
-// 	return (
-//     <SearchIcon onClick={() => {isActive && setSpeach()}} />
-// 	);
-// };
+	const classes = useStyles()
 
-// export default Speaker;
+	const [active, setActive] = useState(false)
+	const { transcript, resetTranscript } = useSpeechRecognition()
 
-
-const Speaker = ({value, setValue}: any) => {
-	// const { contextValue, ContextisActive } = useContext(Context);
-	// const [speakValue, setSpeakValue] = contextValue;
-	const [isActive, setIsActive] = useState(false);
-	const { transcript, setTranscript } = useSpeechRecognition();
-
-	// useEffect(() => {
-	// 	isActive && console.log('текущая фраза:', transcript);
-	// 	setValue(transcript);
-	// }, [transcript]);
+	useEffect(() => {
+			if(
+				transcript.includes('очистить') ||
+				transcript.includes('delete')   ||
+				transcript.includes('löschen')
+				) {
+				resetTranscript('')
+			}
+			setValue(transcript)
+	}, [transcript])
 
 	const setSpeach = () => {
-		setIsActive(!isActive);
-		!isActive
-			? SpeechRecognition.startListening({ continuous: true })
-			: SpeechRecognition.stopListening();
-	};
+			setActive(!active)
+			!active
+					? SpeechRecognition.startListening({ continuous: true, language: lang })
+					: (SpeechRecognition.stopListening(), resetTranscript(''))
+	}
 
-	return (
-    <SearchIcon onClick={() => {isActive && setSpeach()}} />
-	);
-};
+	return <MicroIcon onClick={setSpeach} className={`${active ? classes.microIconActive : classes.microIconDeactive} ${classes.microIcon}`} />
+}
 
-export default Speaker;
+export default Speaker

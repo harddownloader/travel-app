@@ -4,6 +4,7 @@ import InputBase from '@material-ui/core/InputBase'
 import { Context } from '@/utils/Context.jsx'
 import { CountryType } from '@/utils/typeCountry'
 import Speaker from '@/components/header/Speaker'
+import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -73,22 +74,27 @@ const Search = (): JSX.Element => {
 		)
 	}, [value, setValue]) // eslint-disable-line
 	return (
-		<div className={classes.search}>
-			<div className={classes.searchIcon}>
-				{/* <SearchIcon /> */}
-				<Speaker value={value} setValue={setValue} />
+		<>
+			<div className={classes.search}>
+				<div className={classes.searchIcon}>
+					<SearchIcon />
+					{/* <Speaker value={value} setValue={setValue} lang={leng} /> */}
+				</div>
+				{/* <Mic /> */}
+				
+				<InputBase
+					value={value}
+					onChange={handlerChange.bind(this)}
+					placeholder=''
+					classes={{
+						root: classes.inputRoot,
+						input: classes.searchInput,
+					}}
+					inputProps={{ 'aria-label': 'search', autoFocus: true }}
+				/>
 			</div>
-			<InputBase
-				value={value}
-				onChange={handlerChange.bind(this)}
-				placeholder=''
-				classes={{
-					root: classes.inputRoot,
-					input: classes.searchInput,
-				}}
-				inputProps={{ 'aria-label': 'search', autoFocus: true }}
-			/>
-		</div>
+			<Speaker value={value} setValue={setValue} lang={leng}/>
+		</>
 	)
 }
 

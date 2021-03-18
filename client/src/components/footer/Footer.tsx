@@ -96,7 +96,7 @@ const Footer = (): JSX.Element => {
 
   return (
     <footer className={classes.root} >
-      <Grid container xs={12}>
+      <Grid container>
         <Grid item className={classes.courseBlock} xs={12}>
            <a href="https://rs.school/react/">
              <Icon><img className={classes.footerLogo} src={logo} /></Icon>
