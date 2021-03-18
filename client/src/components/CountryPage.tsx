@@ -30,7 +30,9 @@ const useStyles = makeStyles({
 		backgroundColor: '#cccded',
 		margin: '1rem 0',
 	},
-	root: {},
+	root: {
+		minHeight: '100vh'
+	},
 	countryAbout: {
 		marginBottom: 60,
 	},
@@ -38,9 +40,7 @@ const useStyles = makeStyles({
 		margin: '20px 0',
 		width: '100%',
 	},
-	widgetContainer: {
 
-	}
 })
 
 type CountryPage = () => JSX.Element
@@ -84,7 +84,7 @@ const CountryPage: CountryPage = () => {
 		<>
 			<Header />
 			{!loaded && <CircularProgress />}
-			<Container maxWidth='lg'>
+			<Container maxWidth='lg' className={classes.root}>
 				{loaded && (
 					<Typography variant='h2' component='h1' align='center'>
 						{countryData.name}

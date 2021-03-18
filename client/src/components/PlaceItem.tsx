@@ -22,9 +22,10 @@ const useStyles = makeStyles({
     overflow: "hidden",
     objectFit: 'fill',
     aspectRatio: '4.5/3',
+    transition: 'all .5s',
     '&:hover': {
       transform: 'scale(1.1)',
-      transition: 'all .5s'
+
     }
   },
   card__cardContent: {
