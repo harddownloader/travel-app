@@ -24,7 +24,7 @@ module.exports = {
 		new ESLintPlugin({
 			extensions: ['.js', '.ts', '.tsx', 'jsx'],
 		}),
-		new ForkTsCheckerWebpackPlugin({ async: false }),
+		// new ForkTsCheckerWebpackPlugin({ async: false }),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './public/index.html',
