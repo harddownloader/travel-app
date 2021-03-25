@@ -8,10 +8,6 @@ import Search from './Search'
 import Language from './Language'
 import { Link } from 'react-router-dom'
 
-const a = window.pageYOffset
-console.log(a)
-
-
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -21,49 +17,46 @@ const useStyles = makeStyles((theme: Theme) =>
 		menuButton: {
 			marginRight: theme.spacing(2),
 		},
-		// title: {
-		// 	flexGrow: 1,
-		// 	width: 'auto',
-		// 	// [theme.breakpoints.up('sm')]: {
-		// 	// 	width: 'auto',
-		// 	// 	display: 'inline-block'
-		// 	// },
-		// },
 		mainPage: {
 			flexGrow: 1,
 			width: 'auto',
 			display: 'none',
 			[theme.breakpoints.up('sm')]: {
 				width: 'auto',
-				display: 'inline-block'
+				display: 'inline-block',
 			},
 		},
 		notMainPage: {
 			flexGrow: 1,
 			width: 'auto',
-			display: 'block'
-		}
+			display: 'block',
+		},
 	}),
 )
 
-export default function SearchAppBar(): JSX.Element {
+export default function Header(): JSX.Element {
 	const classes = useStyles()
 
 	const getDisplayPropertyForTitle = () => {
-		return document.location.pathname === "/" ? classes.mainPage : classes.notMainPage
+		return document.location.pathname === '/'
+			? classes.mainPage
+			: classes.notMainPage
 	}
 
 	return (
 		<div className={classes.root}>
 			<AppBar position='static'>
 				<Toolbar>
-					<Link to="/" style={{textDecoration: 'none'}}>
+					<Link to='/' style={{ textDecoration: 'none' }}>
 						<Logo />
 					</Link>
-					<Typography className={getDisplayPropertyForTitle()} variant='h6' noWrap>
+					<Typography
+						className={getDisplayPropertyForTitle()}
+						variant='h6'
+						noWrap>
 						Travel App
 					</Typography>
-					{document.location.pathname === "/" && <Search />}
+					{document.location.pathname === '/' && <Search />}
 					<Language />
 				</Toolbar>
 			</AppBar>

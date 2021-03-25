@@ -3,7 +3,6 @@
 ## Creators
 * [Serafim Krutskevich](https://github.com/harddownloader/)
 * [Eugen Bondarenko](https://github.com/evgeshabond)
-* [Valera Khoma](https://github.com/Bergamolt)
 * [Vlas Maskalenchik](https://github.com/Exooo1)
 * [Sergey Shevchenko](https://github.com/SerhiiShevchenkoOo)
 
@@ -26,11 +25,13 @@ $ yarn start
 
 Serve frontend with hot reload:
 ```
+
 $ yarn dev
 ```
 
 Build frontend:
 ```
+
 $ yarn build
 ```
 
